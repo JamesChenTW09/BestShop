@@ -31,12 +31,14 @@ export default function TourBlockDetail({data, likeHeartCount, setLikeHeartCount
   }, []);
     
   const setItemDetailOrder = () =>{
-    let itemDetailArr = Object.values(data["_subtable_1000139"]);
-    let newItemDetailArr = [];
-    itemDetailArr.forEach(item=>{
-      newItemDetailArr[item["index"]] = item;
-    })
-    setOrderItemDetail(newItemDetailArr);
+    if(data["_subtable_1000139"]){
+      let itemDetailArr = Object.values(data["_subtable_1000139"]);
+      let newItemDetailArr = [];
+      itemDetailArr.forEach(item=>{
+        newItemDetailArr[item["index"]] = item;
+      })
+      setOrderItemDetail(newItemDetailArr);
+    }
   }
 
 

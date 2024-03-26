@@ -53,7 +53,9 @@ $color-dark-gray: rgb(97,97,97);
             width: 74%;
             margin-top: 12px;
             position: relative;
-            overflow-x: scroll;
+            overflow-x: auto;
+            display: flex;
+            align-items: center;
             &::-webkit-scrollbar {
                 display: none;
             }
@@ -62,8 +64,8 @@ $color-dark-gray: rgb(97,97,97);
                 flex-direction: column;
                 font-size: 13px;
                 color: $color-dark-gray;
+                margin-right:45px ;
                 border-bottom: 3px solid transparent;
-                margin-right: 45px;
                 padding-bottom: 10px;
                 &:hover{
                     border-bottom: 3px solid  $color-dark-gray;

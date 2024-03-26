@@ -4,7 +4,7 @@ import "../../Style/Header/NavTypeSelect.scss"
 
 import { TYPELIST } from "../../CommonFunction/Const.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCity, faArrowRight , faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight , faArrowLeft, faUtensils, faMartiniGlass, faMugHot, faCow, faPizzaSlice, faBurger, faFish, faCheese, faBowlFood, faBreadSlice, faBacon} from '@fortawesome/free-solid-svg-icons'
 
 import {  useDispatch, useSelector } from 'react-redux';
 import {  setIfFetchMainPage  } from '../../features/handleBoolean/toggleFetchData.js';
@@ -47,6 +47,8 @@ export default function NavTypeSelect() {
         dispatch(setIfFetchMainPage(true)); 
     }
 
+    const TYPEICONLIST = [faUtensils,faBurger,faMartiniGlass,faMugHot,faMugHot,faFish,faBowlFood,faUtensils,faPizzaSlice,faCow,faUtensils,faBacon,faCheese,faUtensils,faBreadSlice,faUtensils];
+
   return (
     <>
       <nav className="typeSearchAndOrderOutContainer flexCenter">
@@ -58,12 +60,14 @@ export default function NavTypeSelect() {
                 </div> 
             </div>:null
         }
-            <div className='typeSearchContainer flexCenter' ref={typeSearchContainer} onScroll={handleScrolltypes}>
+            <div className='typeSearchContainer' ref={typeSearchContainer} onScroll={handleScrolltypes}>
                 {
                     TYPELIST.map((type, index)=>{
                         const ifSelected = searchText === type;
+                        const icon = TYPEICONLIST[index];
+
                         return (<div key={index}  style={ifSelected? {borderBottom:"3px solid gray"}:{}} className="typeItemContainer flexCenter" onClick={()=>handleSelectType(type)}>
-                                    <FontAwesomeIcon icon={faCity} className="navIcons"  />
+                                    <FontAwesomeIcon icon={icon} className="navIcons"  />
                                     <div className="typeItemName">{type}</div>
                                 </div>)
                     })

@@ -34,7 +34,7 @@ export default function Header() {
   return (
     <header id="mainNavBar" className="flexCenter">
       <div className="navBarContainer flexBetween">
-        <h2 id="mainLogo">{smallScreen600 ? "BS" : "BESTT SHOP"}</h2>
+        <h2 id="mainLogo">{smallScreen600 ? "BS" : "BEST SHOP"}</h2>
         <div className="navSearchContainer">
           <input className="navSearchInput" ref={searchInputRef} type="text" onKeyDown={(e)=> e.key === "Enter" && handleSearch()} placeholder="搜尋"></input>
           <FontAwesomeIcon id="navSearchGlassIcon" icon={faMagnifyingGlass} className="navIcons" onClick={handleSearch} />

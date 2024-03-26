@@ -28,12 +28,12 @@
 
 
 @media(max-width: 900px) {
-    .addMoreImgsItem{
+    .addMoreImgsItemContainer{
         font-size: 36px;
         width: 80px;
         height: 56px;
         margin: 10px 3px 5px 10px;
-        img{
+        .addMoreImgsItem{
             width: 80px;
         }
         .deleteAddImgIcon{

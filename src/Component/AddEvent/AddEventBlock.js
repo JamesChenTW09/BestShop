@@ -112,7 +112,7 @@ export default function AddEventBlock() {
     setSaving(true);
 
     setTimeout(() => {
-        let imgList = document.querySelectorAll(".selectedMainAddImagenContainer");
+        let imgList = document.querySelectorAll(".finalImgsItem");
         async function convertImagesToBlob(imgList){
             const promises = [];
             for(let i = 0; i < imgList.length; i++){
@@ -237,6 +237,7 @@ const toPreviousStep = ()=>{
             </div>
             <input accept='.jpg,.png,.webp' onChange={uploadNewImg} id="fileInput" type="file" style={{display: "none"}}></input>
             <div className='addEventBlockInContainer'>
+                <div className='savingDarkBackground' style={saving?{display:"block"}:{display:"none"}}></div>
                 {steps === ADDTOURSTEP.INSERTIMG? 
                     <div className='addEventFirstImgContainer'>
                             <div className='firstImgUploadContainer flexCenter'>
@@ -246,7 +247,6 @@ const toPreviousStep = ()=>{
                             </div>
                     </div>:
                     <div className='addEventDetailAndCropImgContainer'>
-                        <div className='savingDarkBackground' style={saving?{display:"block"}:{display:"none"}}></div>
                         {steps === ADDTOURSTEP.IMGCROP? 
                             <AddEventImgCrop ifImgLoading={ifImgLoading}/>
                             :

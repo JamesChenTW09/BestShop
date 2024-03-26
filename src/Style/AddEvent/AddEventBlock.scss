@@ -54,6 +54,14 @@ $color-main : #e62300;
     .addEventBlockInContainer{
         overflow-y: hidden;
         overflow-x: hidden;
+        .savingDarkBackground{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+            opacity: 0.8;
+            z-index: 20;
+        }
     }
     .addEventFirstImgContainer{
         width: 100%;
@@ -87,14 +95,6 @@ $color-main : #e62300;
         width: 100%;
         height: 460px;
         position: relative;
-        .savingDarkBackground{
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: gray;
-            opacity: 0.8;
-            z-index: 20;
-        }
     }
 
 }

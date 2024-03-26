@@ -1,0 +1,107 @@
+$color-light-gray: rgb(209, 209, 209);
+
+
+.tourBlockItemContainer{
+    position: relative;
+    .tourBlockItem{
+        cursor: pointer;
+        width: 360px;
+        margin: 24px 20px;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(0, 0, 0, 0.1), 5px -5px 10px rgba(0, 0, 0, 0.1), -5px 5px 10px rgba(0, 0, 0, 0.1);
+        .imgArrowButton{
+            position: absolute;
+            top: 120px;
+            z-index: 10;
+            right: 10px;
+            background-color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            .navIcons{
+                font-size: 15px;
+            }
+        }
+        .nextImgButton{
+            right: 10px;
+        }
+        .preImgButton{
+            left: 10px;
+        }
+        .tourItemImgContainer{
+            width: 100%;
+            height: 240px;
+            background-color: $color-light-gray;
+            transition: transform 0.4s ease;
+            display: flex;
+            .tourItemImg{        
+                min-width: 360px;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .tourInfoContainer{
+            height: 25px;
+            margin: 10px 0 0 4px;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            .tourBlockDateilItem{
+                margin: 0 5px;
+                padding: 3px 7px;
+                border-radius: 8px;
+                background-color: $color-light-gray;
+            }
+        }
+        .tourItemTitleContainer{
+            height: 30px;
+            overflow: hidden;
+            padding: 4px 10px;
+            margin-top: 5px;
+            .tourItemTitle{
+                font-size: 17px;
+                font-weight: bolder;
+                width: 70%;
+            }
+            .tourBlockStarContainer{
+                color: #e62300;
+            }
+        }
+        .tourItemExtraInfoContainer{
+            margin: 6px 10px;
+            font-size: 13px;
+            .tourItemIconContainer{
+                display: flex;
+                align-items: center;
+                .navIcons{
+                    margin:0 4px;
+                    padding-top: 2.5px;
+                }
+                .deleteTourIcon{
+                    margin-left: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+@media(max-width: 400px) {
+    .tourBlockItemContainer{
+        .tourBlockItem{
+            width: 320px;
+            margin: 24px 0px;
+            .tourItemImgContainer{
+                height: 215px;
+                .tourItemImg{        
+                    min-width: 320px;
+                }
+            }
+        }
+    }
+}

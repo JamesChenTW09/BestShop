@@ -1,0 +1,44 @@
+.tourBlockDetailItemContainer{
+    margin-top: 8px;
+    .tourBlockDetailItemTitle{
+        display: flex;
+        align-items: center;
+        .tourBlockDetailItemText{
+            font-weight: bold;
+            font-size: 15px;
+            margin-left: 10px;
+        }
+        .tourBlockDetailStarContainer{
+            display: flex;
+            align-items: center;
+            color: #e62300;
+            font-size: 15px;
+            margin-left: auto;
+            .navIcons{
+                margin: 0 2px;
+            }
+        }
+    }
+    .tourBlockDetailItemPrice{
+        border-left: 2px solid #000;
+        font-weight: bold;
+        margin-top: 5px;
+        margin-left: 14px;
+        padding-left: 18px;
+
+    }
+}
+
+
+@media(max-width: 900px) {
+    .tourBlockDetailItemContainer{
+        .tourBlockDetailItemTitle{
+            .tourBlockDetailItemText{
+                font-size: 13px;
+            }
+            .tourBlockDetailStarContainer{
+                font-size: 11px;
+            }
+        }
+    }
+}

@@ -1,0 +1,70 @@
+.addItemDetailContainer{
+    margin: 10px 0;
+    .itemDetailBasicInfo{
+        margin: 5px auto;
+            display: flex;
+        align-items: center;
+        .addOrderItemIndex{
+            width: 24px;
+        }
+        .addOrderItemName{
+            width: 160px;
+            padding: 5px 8px;
+            font-size: 13px;
+            border: none;
+            border-bottom: 1px solid gray;
+            outline: none;
+            &:focus {
+                border-bottom: 1px solid #ff4220;
+            }
+            &::placeholder{
+                text-align: center;
+            }
+        }
+        .addOrderItemPrice{
+            width: 80px;
+            margin-left: 8px;
+            padding: 5px 8px;
+            font-size: 13px;
+            border: none;
+            border-bottom: 1px solid gray;
+            outline: none;
+            &:focus {
+                border-bottom: 1px solid #ff4220;
+            }
+            &::placeholder{
+                text-align: center;
+            }    
+        }
+    }
+    .addOrderItemStarsContainer{
+        display: flex;
+        align-items: center;
+        width: 90%;
+        margin-top: 10px;
+        margin-left: 24px;
+        font-size: 14px;
+        .addOrderItemStarsText{
+            width: 30px;
+        }
+        .addOrderItemStarIconContainer{
+            width: 130px;
+            margin-left: 8px;
+
+            .addOrderItemStarIcon{
+                font-size: 15px;
+                color: #ff4220;    
+                margin-right: 8px;
+            }
+        }
+        .addOrderItemTrashIcon{ 
+            width: 80px;
+            color: #ff4220;
+            text-align: center;
+            font-size: 16px;
+        }
+        .navIcons{
+            cursor: pointer;
+        }
+    }
+}

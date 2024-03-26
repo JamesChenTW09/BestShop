@@ -1,0 +1,148 @@
+$color-main : #e62300;
+
+.addEventBlockOutContainer{
+    width: 480px;
+    height: 500px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 200;
+    border-radius: 8px;
+    transition: width 0.3s ease;
+    .addEventTitleContainer{
+        height: 40px;
+        width: 100%;
+        font-size: 17px;
+        font-weight: bolder;
+        border-bottom: 1px solid rgb(183, 183, 183);
+        position: relative;
+        padding: 0 15px;
+        .cancelAddNewEvent{
+            color: $color-main;
+            position: relative;
+            .saveLoading{
+                position: absolute;
+                top: 6px;
+                right: 20px;
+                width: 16px;
+                height: 16px;
+                border: 2px solid rgba(0, 0, 0, 0.1);
+                border-radius: 50%;
+                border-top-color: $color-main;
+                animation: spin2 1s linear infinite;
+            }
+        }
+        .saveAddNewEvent{
+            color: $color-main;
+            cursor: pointer;
+            position: relative;
+            .saveLoading{
+                position: absolute;
+                top: 6px;
+                left: -20px;
+                width: 16px;
+                height: 16px;
+                border: 2px solid rgba(0, 0, 0, 0.1);
+                border-radius: 50%;
+                border-top-color: $color-main;
+                animation: spin2 1s linear infinite;
+            }
+        }
+    }
+    .addEventBlockInContainer{
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+    .addEventFirstImgContainer{
+        width: 100%;
+        height: 460px;
+        .firstImgUploadContainer{
+            flex-direction: column;
+            height: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            .navIcons{
+                font-size: 80px;
+            }
+            .addFirstImgText{
+                margin: 15px 0;
+            }
+            .addFirstImgLabel{
+                cursor: pointer;
+                border-radius: 8px;
+                background-color: $color-main;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+            }
+        }
+    }
+
+
+    .addEventDetailAndCropImgContainer{
+        display: flex;
+        width: 100%;
+        height: 460px;
+        position: relative;
+        .savingDarkBackground{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+            opacity: 0.8;
+            z-index: 20;
+        }
+    }
+
+}
+.addEventBackground{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 199;
+    background-color: rgb(68, 68, 68);
+    opacity: 0.6;
+    .xmarkContainer{
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 28px;
+        color: white;
+    }
+}
+@keyframes spin {
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg); 
+    }
+  }
+@keyframes spin2 {
+    100% {
+      transform: rotate(360deg); 
+    }
+}
+
+
+@media(max-width: 900px) {
+    .addEventBlockOutContainer{
+        width: 320px;
+        height: 400px;
+        overflow: hidden;
+        .addEventBlockInContainer{
+            overflow-y: auto;
+        }
+        .addEventFirstImgContainer{
+            height: 360px;
+        }
+        .addEventDetailAndCropImgContainer{
+            flex-direction: column;
+            margin: 0 auto;
+            height: 360px;
+        }
+    }
+}

@@ -1,0 +1,157 @@
+$color-main : #e62300;
+$color-medium-gray: rgb(156, 156, 156);
+
+
+@mixin addEventSelectTypeAndLoc {
+    font-size: 14px;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    outline: none;
+  }
+
+.addEventDetailOutContainer{
+    width: 40%;
+    padding: 10px 0;
+    font-size: 14px;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+    .addEventDetailInContainer{
+        width: 90%;
+        margin: 0 auto;
+        .addDetailLocAndTypeContainer{
+            border: 1px solid $color-medium-gray;
+            .addDetailLocContainer{
+                width: 50%;
+                border-right: 1px solid $color-medium-gray;
+                .addEventDetailInputLoc{
+                    @include addEventSelectTypeAndLoc
+                }
+            }
+            .addDetailTypeContainer{
+                width: 50%;
+                .addEventDetailInputType{
+                    @include addEventSelectTypeAndLoc
+                }
+    
+            }
+        }
+        .addDetailTitleContainer{
+            margin: 10px 0;
+            position: relative;
+            .addEventDetailInputTitle{
+                width: 100%;
+                padding: 10px 14px;
+                border-radius: 4px;
+                border: none;
+                outline: 1px solid $color-medium-gray;
+                &:focus {
+                    outline: 2px solid $color-main;
+                }
+            }
+            .addDetailHintTitleContainer{
+                position: absolute;
+                background-color: white;
+                top: 105%;
+                left: -1%;
+                width: 102%;
+                height: 150px;
+                border-radius: 4px;
+                box-shadow: 5px 5px 10px rgba(0,0,0,0.3), -5px 5px 10px rgba(0,0,0,0.3);
+                overflow-y: auto;
+                .addDetailHintTitleItem{
+                    width:100%;
+                    padding: 5px 10px;
+                    cursor: pointer;
+                    &:hover{
+                        background-color: rgb(193, 193, 193);
+                    }
+                }
+            }
+        }
+        .addDetailContentContainer{
+            .addDetailContentItem{
+                margin: 4px 0;
+                resize: none;
+                width: 100%;
+                padding: 10px 14px;
+                border-radius: 4px;
+                border: none;
+                outline: 1px solid $color-medium-gray;
+                &:focus {
+                    outline: 2px solid $color-main;
+                }
+            }
+    
+        }
+        .addDetailDateContainer{
+            .addDetailDateInput{
+                padding: 5px 8px;
+                outline: none;
+                border: none;   
+                border-bottom: 1px solid  $color-medium-gray;
+            }
+        }
+    
+        .addDetailRecommendContainer{
+            padding-bottom: 5px;
+            border-bottom: 1px solid  $color-medium-gray;
+            .addDetailRecommendStarContainer{
+                padding: 5px 8px;
+                .navIcons{
+                    margin: 0 3px;
+                    color: $color-main;;
+                }
+            }
+        }
+
+        .addTourItemIconContainer{
+            padding-top: 8px;
+            color: $color-main;
+            .addTourItemIconText{
+                cursor: pointer;
+            }
+            .tourDetailButton {
+                cursor: pointer;
+                margin: 3px 0 0 3px;
+                width: 14px;
+                height: 14px;
+                background-color: $color-main;
+                color: #fff;
+                cursor: pointer;
+                border-radius: 50%;
+                font-size: 9px;
+            }
+        }
+    }
+}
+
+@media(max-width: 900px) {
+    .addEventDetailOutContainer{
+        width: 100%;
+        margin: 0 auto;
+        font-size: 12px;
+        .addEventDetailInContainer{
+            .addDetailLocAndTypeContainer{
+                .addDetailLocContainer{
+                    .addEventDetailInputLoc{
+                        font-size: 12px;
+                    }
+                }
+                .addDetailTypeContainer{
+                    .addEventDetailInputType{
+                        font-size: 12px;
+                    }
+        
+                }
+            }
+            .addDetailRecommendContainer{
+                .addDetailRecommendStarContainer{
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}

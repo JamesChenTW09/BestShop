@@ -1,0 +1,50 @@
+.addMoreImgsItemContainer{
+    font-size: 36px;
+    width: 96px;
+    height: 64px;
+    margin: 25px 8px 5px 8px;
+    cursor: pointer;
+    position: relative;
+    .addMoreImgsItem{
+        border: 1px solid rgb(176, 176, 176);
+        width: 96px;
+        height: 100%;
+        object-fit: cover;
+    }
+    .deleteAddImgIcon{
+        width: 15px;
+        height: 15px;
+        background-color: rgb(176, 176, 176);
+        border-radius: 50%;
+        position: absolute;
+        right: -3px;
+        top: -3px;
+        z-index: 10;
+        .navIcons{
+            font-size: 12px;
+        }
+    }
+}
+
+
+@media(max-width: 900px) {
+    .addMoreImgsItem{
+        font-size: 36px;
+        width: 80px;
+        height: 56px;
+        margin: 10px 3px 5px 10px;
+        img{
+            width: 80px;
+        }
+        .deleteAddImgIcon{
+            width: 10px;
+            height: 10px;
+            right: -5px;
+            top: -5px;
+            .navIcons{
+                font-size: 8px;
+            }
+        }
+    }
+
+}

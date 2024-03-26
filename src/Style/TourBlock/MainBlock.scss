@@ -1,0 +1,34 @@
+.mainBlockContainer{
+    width: 100vw;
+    .mainBlock{
+        margin: 170px auto 0 auto;
+        width: 1200px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+@media(max-width: 1200px) {
+    .mainBlockContainer{
+        .mainBlock {
+            width: 90%;
+            justify-content: center;
+        }
+    }
+}
+@media(max-width: 900px) {
+    .mainBlockContainer{
+        .mainBlock {
+            width: 400px;
+        }
+    }
+}
+
+@media(max-width: 400px) {
+    .mainBlockContainer{
+        .mainBlock {
+            margin-top: 200px;
+            width: 320px;
+        }
+    }
+}

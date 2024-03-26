@@ -1,0 +1,70 @@
+$color-medium-gray: rgb(156, 156, 156);
+$color-dark-gray: rgb(97,97,97);
+
+.orderListContainer{
+    width: 190px;
+    margin-left: auto;
+    .orderListButton{
+        position: relative;
+        cursor: pointer;
+        border: 1px solid $color-medium-gray;
+        border-radius: 8px;
+        padding: 11px 12px;
+        .orderFilterImg{
+            width: 20px;
+            height: 20px;
+        }
+        .orderFilterText{
+            margin-left: 5px;
+            font-size: 13px;
+        }
+        .orderDropDownContainer{
+            position: absolute;
+            top: 46px;
+            right: 0;
+            width: 100%;
+            border-radius: 8px;
+            background-color:white;
+            border: 1px solid $color-medium-gray;
+            font-size: 16px;
+            text-align: center;
+            overflow: hidden;
+            cursor: pointer;
+            animation: slideDown 0.3s ease;
+            .orderDropDownItem{
+              padding: 8px 0;
+              font-size: 14px;
+              transition: background-color 0.3s ease;
+              &:hover{
+                background-color: $color-medium-gray;
+              }
+            }
+          }
+    }
+}
+
+@media(max-width: 800px) {
+    .orderListContainer{
+        width: 140px;
+        .orderListButton{
+            img{
+                width: 15px;
+                height: 15px;
+            }
+            .orderDropDownContainer{
+                top: 42px;
+            }
+        }
+    }
+}
+
+@media(max-width: 551px) {
+    .orderListContainer{
+        width: 30px;
+        .orderListButton{
+            .orderDropDownContainer{
+                width: 140px;
+            }
+        }
+    }
+}

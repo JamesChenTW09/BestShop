@@ -1,0 +1,135 @@
+$color-light-gray: rgb(209, 209, 209);
+$color-medium-gray: rgb(156, 156, 156);
+$color-dark-gray: rgb(97,97,97);
+
+
+
+.tourBlockDetailContainer{
+    width: 550px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    max-height: 600px;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 100;
+    border-radius: 8px;
+    overflow-y: auto;
+    .tourBlockDetail{
+        border-bottom: 2px solid $color-medium-gray;
+        padding-bottom: 30px;
+        width: 80%;
+        margin: 0 auto 10px auto;
+        font-weight: bold;
+
+        .tourBlockDetailTitle{
+            margin: 15px 0;
+        }
+        .tourBlockDetailMainImgContainer{
+            width: 100%;
+            height: 290px;
+            .tourBlockDetailMainImgItem{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .tourBlockDetailMoreImgContainer{
+            margin: 15px 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            .tourBlockDetailMoreImgItem{
+                margin: 4px;
+                cursor: pointer;
+                width: 18%;
+                height: 50px;
+                object-fit: cover;
+                border: 1px solid $color-medium-gray;
+            }
+
+        }
+        .tourBlockDetailContentContainer{
+            font-size: 15px;
+            .tourBlockDetailAddressAndType{
+                display: flex;
+                align-items: center;
+                margin-bottom: 12px;
+                font-size: 12px;
+                .tourBlockDetailSmallItem{
+                    padding: 3px 7px;
+                    border-radius: 8px;
+                    background-color: $color-medium-gray;
+                    margin-right: 8px;
+                }
+            }
+            .tourBlockDetailContent{
+                white-space: 'pre-wrap';
+            }
+        }
+        .tourBlockDetailTimeTitle{
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    }
+}
+
+.darkBackground{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    background-color: $color-dark-gray;
+    opacity: 0.8;
+    .xmarkContainer{
+        cursor: pointer;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        .navIcons{
+            font-size: 28px;
+            color: white;
+        }
+    }
+}
+
+
+@media(max-width: 900px) {
+    .tourBlockDetailContainer{
+        top: 53%;
+        width: 320px;
+        max-height: 500px;
+        .tourBlockDetail{
+            .tourBlockDetailMainImgContainer{
+                height: 160px;
+            }
+            .tourBlockDetailContentContainer{
+                font-size: 12px;
+            }
+            .tourBlockDetailTimeTitle{
+                font-size: 15px;
+            }
+            .tourBlockDetailMoreImgContainer{
+                .tourBlockDetailMoreImgItem{
+                    width: 20%;
+                    height: 32px;
+                }
+
+            }
+            .tourBlockDetailContainer{            
+                width: 90%;
+                .imgContainer{
+                    height: 192px;
+                }
+                .moreImgContainer{
+                    img{
+                        height: 40px;
+                    }
+        
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,146 @@
+$color-light-gray: rgb(209, 209, 209);
+$color-medium-gray: rgb(156, 156, 156);
+
+
+#mainNavBar{
+  width:100vw;
+  height: 70px;
+  background-color: white;
+  border-bottom: 1px solid $color-light-gray;
+  z-index: 40;
+  position: fixed;
+  top: 0;
+  .navBarContainer{
+    width: 80%;
+    #mainLogo{
+      color: #e62300;
+    }
+    .navSearchContainer{
+      position: relative;
+      #navSearchGlassIcon{
+        cursor: pointer;
+        position: absolute;
+        left: 8px;
+        top: 6px;
+      }
+      .navSearchInput{
+        padding: 8px 20px 8px 30px;
+        border-radius: 8px;
+        background-color: $color-light-gray;
+        border: none;
+        outline: none;
+      }
+    }
+    .addEventLogInContainer{
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      .addNewEventButton{
+        border: 1px solid gray;
+        border-radius: 8px;
+        margin-right: 20px;
+        padding: 5px 12px;
+        cursor: pointer;
+      }
+      .logInContainer{
+        width: 75px;
+        padding: 8px 5px;
+        border: 1px solid $color-medium-gray;
+        border-radius: 30px;
+        position: relative;
+        cursor: pointer;
+        .navBurgerLineContainer{
+          height: 30px;
+          flex-direction: column;
+          .navBurgerLine{
+            width: 13px;
+            height: 1.5px;
+            background-color: black;
+            margin: 1px 0 1.5px 0;
+          }
+        }
+        .logInIconContainer{
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          background-color: $color-medium-gray;
+          .navIcons{
+            color: white;
+          }
+        }
+        .logInDropDownContainer{
+          overflow: hidden;
+          position: absolute;
+          top: 50px;
+          right: 0;
+          width: 150px;
+          border-radius: 8px;
+          background-color: white;
+          border: 1px solid $color-medium-gray;
+          cursor: pointer;
+          animation: slideDown 0.3s ease;
+          .userInfoButton{
+            text-align: center;
+            width: 100%;
+            padding: 8px 0;
+            transition: background-color 0.3s ease;
+            &:hover{
+              background-color: $color-medium-gray;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media(max-width: 800px) {
+  #mainNavBar{
+    .navBarContainer{
+      width: 90%;
+      .navSearchContainer{
+        .navSearchInput{
+          width: 180px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 600px) {
+  #mainNavBar{
+    .navBarContainer{
+      .navSearchContainer{
+        .navSearchInput{
+          width: 150px;
+        }
+      }
+      .addEventLogInContainer{
+        .logInContainer{
+          width: 40px;   
+          .logInDropDownContainer{
+            top: 40px;
+          }       
+          .navBurgerLineContainer{
+            justify-content: space-around;
+            height: 20px;
+            .navBurgerLine{
+              width: 18px;
+              height: 2.5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

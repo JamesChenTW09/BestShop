@@ -57,46 +57,45 @@ $color-main : #e62300;
         .savingDarkBackground{
             position: absolute;
             width: 100%;
-            height: 100%;
+            height: 460px;
             background-color: gray;
             opacity: 0.8;
             z-index: 20;
         }
-    }
-    .addEventFirstImgContainer{
-        width: 100%;
-        height: 460px;
-        .firstImgUploadContainer{
-            flex-direction: column;
-            height: 100%;
-            font-size: 16px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            .navIcons{
-                font-size: 80px;
-            }
-            .addFirstImgText{
-                margin: 15px 0;
-            }
-            .addFirstImgLabel{
-                cursor: pointer;
-                border-radius: 8px;
-                background-color: $color-main;
-                color: white;
-                border: none;
-                padding: 5px 10px;
+        .addEventFirstImgContainer{
+            width: 100%;
+            height: 460px;
+            .firstImgUploadContainer{
+                flex-direction: column;
+                height: 100%;
+                font-size: 16px;
+                font-weight: bold;
+                letter-spacing: 1px;
+                .navIcons{
+                    font-size: 80px;
+                }
+                .addFirstImgText{
+                    margin: 15px 0;
+                }
+                .addFirstImgLabel{
+                    cursor: pointer;
+                    border-radius: 8px;
+                    background-color: $color-main;
+                    color: white;
+                    border: none;
+                    padding: 5px 10px;
+                }
             }
         }
+    
+    
+        .addEventDetailAndCropImgContainer{
+            display: flex;
+            width: 100%;
+            height: 460px;
+            position: relative;
+        }
     }
-
-
-    .addEventDetailAndCropImgContainer{
-        display: flex;
-        width: 100%;
-        height: 460px;
-        position: relative;
-    }
-
 }
 .addEventBackground{
     position: fixed;
@@ -135,14 +134,17 @@ $color-main : #e62300;
         overflow: hidden;
         .addEventBlockInContainer{
             overflow-y: auto;
-        }
-        .addEventFirstImgContainer{
-            height: 360px;
-        }
-        .addEventDetailAndCropImgContainer{
-            flex-direction: column;
-            margin: 0 auto;
-            height: 360px;
+            .savingDarkBackground{
+                height: 360px;
+            }
+            .addEventFirstImgContainer{
+                height: 360px;
+            }
+            .addEventDetailAndCropImgContainer{
+                flex-direction: column;
+                margin: 0 auto;
+                height: 360px;
+            }
         }
     }
 }

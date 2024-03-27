@@ -31,6 +31,7 @@ Dynamically import componets to increase loading speed.
 
 
 ## RWD
-![螢幕擷取畫面 2024-03-27 095405](https://github.com/JamesChenTW09/BestShop/assets/92699251/3026a509-4afd-4cd9-97c9-9cb9548f31a3)
+![螢幕擷取畫面 2024-03-27 143633](https://github.com/JamesChenTW09/BestShop/assets/92699251/fd2285f3-fd1d-4d1d-a0f7-888f670ae177)  ![螢幕擷取畫面 2024-03-27 143623](https://github.com/JamesChenTW09/BestShop/assets/92699251/07f9eacc-951d-472f-887b-39e3aab84ce6)
+
 
 

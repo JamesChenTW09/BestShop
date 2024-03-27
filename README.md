@@ -8,6 +8,11 @@ Best Shop provides a platform for everyone to upload and view experiences, revie
 
 https://jameschentw09.github.io/BestShop
 
+## Schedule
+### 1️⃣ Member Login and Registration Functionality
+### 2️⃣ Member Establishments Management
+### 3️⃣ Enhance UI/UX 
+
 ## Database
 
 The database is accessed for data creation, modification, and deletion through the [RESTFUL HTTP API](https://www.ragic.com/intl/zh-TW/doc-api) provided by Ragic. Ragic is a cloud-based database software that allows non-technical users to easily design their own databases.

@@ -28,3 +28,9 @@ Adjusting the compression ratio of the image helps reduce the file size of the i
 
 ### 5️⃣ React Lazy
 Dynamically import componets to increase loading speed. 
+
+
+## RWD
+![螢幕擷取畫面 2024-03-27 095405](https://github.com/JamesChenTW09/BestShop/assets/92699251/3026a509-4afd-4cd9-97c9-9cb9548f31a3)
+
+

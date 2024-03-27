@@ -126,7 +126,7 @@ export default function AddEventBlock() {
 
                 const promise = new Promise(resolve => {
                     canvas.toBlob(blob => {
-                      resolve(new File([blob], "testing.webp", { type: "image/webp" }));
+                      resolve(new File([blob], "shopImage.webp", { type: "image/webp" }));
                     },'image/webp', 0.6);
                   });
               

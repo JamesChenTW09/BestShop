@@ -13,6 +13,7 @@ $color-medium-gray: rgb(156, 156, 156);
   .navBarContainer{
     width: 80%;
     #mainLogo{
+      cursor: pointer;
       color: #e62300;
     }
     .navSearchContainer{

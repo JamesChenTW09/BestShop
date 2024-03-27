@@ -12,7 +12,7 @@ import {  setSearchValue  } from '../../features/handleInput/searchText.js';
 
 export default function NavTypeSelect() {
     const dispatch = useDispatch();
-    const searchText = useSelector(state => state.searchText.searchTex);
+    const searchText = useSelector(state => state.searchText.searchText);
     const screenWidth = useSelector(state => state.screenSize.screenWidth);
     const smallScreen800 = screenWidth <= 800;
 
@@ -48,7 +48,6 @@ export default function NavTypeSelect() {
     }
 
     const TYPEICONLIST = [faUtensils,faBurger,faMartiniGlass,faMugHot,faMugHot,faFish,faBowlFood,faUtensils,faPizzaSlice,faCow,faUtensils,faBacon,faCheese,faUtensils,faBreadSlice,faUtensils];
-
   return (
     <>
       <nav className="typeSearchAndOrderOutContainer flexCenter">
@@ -65,7 +64,6 @@ export default function NavTypeSelect() {
                     TYPELIST.map((type, index)=>{
                         const ifSelected = searchText === type;
                         const icon = TYPEICONLIST[index];
-
                         return (<div key={index}  style={ifSelected? {borderBottom:"3px solid gray"}:{}} className="typeItemContainer flexCenter" onClick={()=>handleSelectType(type)}>
                                     <FontAwesomeIcon icon={icon} className="navIcons"  />
                                     <div className="typeItemName">{type}</div>

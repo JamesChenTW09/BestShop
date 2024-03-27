@@ -24,9 +24,11 @@ Use `debounce` to practice  **Infinite Scroll** . By delaying, the required reso
 
 ### 2️⃣ Full Text Search
 Use full text search can quickly find the shops or types you want.
+![Best Shop - Google Chrome 2024-03-27 15-32-12 (1)](https://github.com/JamesChenTW09/BestShop/assets/92699251/1155ebb7-1c41-464c-9da2-d6f9994c7742)
 
 ### 3️⃣ React-Easy-Crop
 A React component to crop images/videos with easy interactions. User can easily drag or zoom the uploaded images and crop them to desired results.
+![Best Shop - Google Chrome 2024-03-27 15-36-07](https://github.com/JamesChenTW09/BestShop/assets/92699251/012b81c5-5e34-44c0-86c7-b4a7cac1daf6)
 
 ### 4️⃣ Compression Ratio of Image
 Adjusting the compression ratio of the image helps reduce the file size of the image and increase the webpage loading speed.

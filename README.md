@@ -1,4 +1,4 @@
-![image](https://github.com/JamesChenTW09/BestShop/assets/92699251/ec3779b2-167e-4b12-b238-dae8052e1cdf)# Best Shop
+# Best Shop
 
 ![螢幕擷取畫面 2024-03-27 093302](https://github.com/JamesChenTW09/BestShop/assets/92699251/ea04d9cc-d90e-4bea-817a-0801e9d25ab3)
 

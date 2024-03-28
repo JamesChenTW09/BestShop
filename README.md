@@ -15,7 +15,7 @@ https://jameschentw09.github.io/BestShop
 
 ## Database
 
-The database is accessed for data creation, modification, and deletion through the [RESTFUL HTTP API](https://www.ragic.com/intl/zh-TW/doc-api) provided by Ragic. Ragic is a cloud-based database software that allows non-technical users to easily design their own databases.
+The database is accessed for data creation, modification, and deletion through the [RESTFUL HTTP API](https://www.ragic.com/intl/zh-TW/doc-api) provided by Ragic. [Ragic](https://www.ragic.com/intl/zh-TW/home?campaign=goadzhtw&gad_source=1&gclid=CjwKCAjwh4-wBhB3EiwAeJsppIZaR_4Jj9teiUJNfikRLvRzY4gE8I2TQPphB1rc9YK7DskPjB5XfRoCAhsQAvD_BwE) is a cloud-based database software that allows non-technical users to easily design their own databases.
 
 ## Lighthouse Report
 ![螢幕擷取畫面 2024-03-27 144345](https://github.com/JamesChenTW09/BestShop/assets/92699251/40e0bce1-5846-409a-ba45-9b2441e8d931)

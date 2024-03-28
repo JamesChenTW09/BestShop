@@ -2,7 +2,7 @@
 
 ![螢幕擷取畫面 2024-03-27 093302](https://github.com/JamesChenTW09/BestShop/assets/92699251/ea04d9cc-d90e-4bea-817a-0801e9d25ab3)
 
-Best Shop提供一個開放平台，讓所有人都能上傳、瀏覽以及管理店家的評論，讓拜訪店家前能有更多有用的參考
+Best Shop提供一個開放平台，讓所有人都能上傳、瀏覽以及管理針對店家的評論，讓拜訪店家前能有更多有用的參考。
 
 ## Live Demo
 https://jameschentw09.github.io/BestShop

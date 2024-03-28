@@ -9,9 +9,9 @@ Best Shop provides a platform for everyone to upload and view experiences, revie
 https://jameschentw09.github.io/BestShop
 
 ## Schedule
-### 1️⃣ Member Login and Registration Functionality
-### 2️⃣ Member Establishments Management
-### 3️⃣ Enhance UI/UX 
+1. Member Login and Registration Functionality
+2. Member Establishments Management
+3. Enhance UI/UX 
 
 ## Database
 

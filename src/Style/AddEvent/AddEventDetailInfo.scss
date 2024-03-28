@@ -89,7 +89,7 @@ $color-medium-gray: rgb(156, 156, 156);
         }
         .addDetailDateContainer{
             .addDetailDateInput{
-                padding: 5px 8px;
+                padding: 5px;
                 outline: none;
                 border: none;   
                 background-color: white;
@@ -100,10 +100,10 @@ $color-medium-gray: rgb(156, 156, 156);
         .addDetailRecommendContainer{
             border-bottom: 1px solid  $color-medium-gray;
             .addDetailRecommendStarContainer{
-                padding: 5px 0px;
+                padding: 5px;
                 .navIcons{
                     margin :4px;
-                    color: $color-main;;
+                    color: $color-main;
                 }
             }
         }

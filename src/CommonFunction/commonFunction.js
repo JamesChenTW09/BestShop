@@ -15,7 +15,7 @@ export async function fetchWithAuth(method, api, body){
 }
 export function setStateArrValueByIndex(index, value, fn){
     fn(prevState => {
-        const updatedArray = [...prevState];
+        const updatedArray = prevState.slice();
         updatedArray[index] = value;
         return updatedArray;
     });
@@ -60,3 +60,4 @@ export function debounce(func, delay) {
       }, delay);
     }
   }
+

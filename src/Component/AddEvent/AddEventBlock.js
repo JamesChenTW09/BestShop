@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import "../../Style/AddEvent/AddEventBlock.scss"
 import AddEventDetailInfo from './AddEventDetailInfo.js';
 import AddEventImgCrop from './AddEventImgCrop.js';

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 
 export const addItemInputObj = createSlice({
@@ -8,7 +9,8 @@ export const addItemInputObj = createSlice({
     },
     reducers: {
         addNewItemDetail: state => {
-            state.addItemDetailArr.push({ starCount : 0, price : "", name : ""});
+            const id = uuidv4();
+            state.addItemDetailArr.push({ starCount : 0, price : "", name : "", id});
         },
         removeItemDetailByIndex: (state,action) => {
             state.addItemDetailArr.splice(action.payload, 1);

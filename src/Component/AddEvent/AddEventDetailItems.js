@@ -10,7 +10,7 @@ import { useState } from "react";
 
 export default function AddTimeDetail({data, index}) {
     const dispatch = useDispatch();
-
+    console.log("detail");
     const handleInputChange = (e)=>{
         const { name, value } = e.target;
         dispatch(setItemDetailByIndex({name, value, index}));
@@ -30,16 +30,16 @@ export default function AddTimeDetail({data, index}) {
   return (
     <div  className='addItemDetailContainer'>
         <div className='itemDetailBasicInfo'>
-            <div className="addOrderItemIndex">{index+1}.</div>
+            <div className="addOrderItemIndex" >{index+1}.</div>
             <input className="addOrderItemName" type='text' placeholder='品項' name='name' onChange={handleInputChange} value={data["name"]}></input>
             <input className="addOrderItemPrice" type='text' placeholder='價錢' name='price' onChange={handleInputChange} value={data["price"]}></input>
         </div>
         <div className="addOrderItemStarsContainer">
             <p className="addOrderItemStarsText">評價</p>
             <div className="addOrderItemStarIconContainer">
-                {starList.map(item=>{
+                {starList.map((item, index)=>{
                     let ifClick = item <= starCount;
-                    return <FontAwesomeIcon onClick={()=>handleStarClick(item)} icon={ifClick? clickStar:unclickStar} className="navIcons addOrderItemStarIcon" />
+                    return <FontAwesomeIcon key={index} onClick={()=>handleStarClick(item)} icon={ifClick? clickStar:unclickStar} className="navIcons addOrderItemStarIcon" />
                 })}
             </div>
             <div className="addOrderItemTrashIcon">

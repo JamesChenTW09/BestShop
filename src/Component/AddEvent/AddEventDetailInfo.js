@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPlus, faStar as clickStar} from '@fortawesome/free-solid-svg-icons'
 import {faStar as unclickStar} from '@fortawesome/free-regular-svg-icons'
 
+
 import {  useDispatch, useSelector } from 'react-redux';
 import {  addNewItemDetail  } from '../../features/handleInput/addItemInputObj.js';
 import {  setTitleHintArr  } from '../../features/handleInput/titleHint.js';
@@ -126,7 +127,6 @@ export default function AddEventDetailInfo({formData, setFormData}) {
     const handlePasteHintTitle = (text)=>{
         setFormData({...formData, "name": text});   
         inputTitleRef.current.focus();
-
     }
   return (
     <div className='addEventDetailOutContainer' style={smallScreen900?{}:{overflowY:"scroll"}}>
@@ -184,7 +184,7 @@ export default function AddEventDetailInfo({formData, setFormData}) {
                 </div>
             </div>
             {addItemDetailArr.map((item,index)=>{
-                return <AddEventDetailItems key={index} data={item} index={index}/>
+                return <AddEventDetailItems key={item["id"]} data={item} index={index}/>
             })}
         </div>
     </div>

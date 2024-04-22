@@ -25,7 +25,6 @@ export default function TourBlock({data}) {
     const [showArrow, setShowArrow] = useState(false);
 
     const ifShowBlockDetail = useSelector((state) => state.toggleBlock.tourDetailBlock[id]);
-    const ifShowWarnBlock = useSelector((state) => state.toggleWarnBlock.ifShowWarnBlock);
     const dispatch = useDispatch();
 
     const handleShowTourDetail = () => {

@@ -10,7 +10,6 @@ import { useState } from "react";
 
 export default function AddTimeDetail({data, index}) {
     const dispatch = useDispatch();
-    console.log("detail");
     const handleInputChange = (e)=>{
         const { name, value } = e.target;
         dispatch(setItemDetailByIndex({name, value, index}));

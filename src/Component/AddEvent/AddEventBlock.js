@@ -193,7 +193,7 @@ const cropImgUtil = (index, img)=>{
         cropDetail.width,
         cropDetail.height
       );
-    let newBase = canvas.toDataURL("image/webp", 0.5);
+    let newBase = canvas.toDataURL("image/webp");
     dispatch(addCropImgList(newBase));
 }
 

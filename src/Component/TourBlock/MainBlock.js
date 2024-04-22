@@ -55,9 +55,23 @@ export default function MainBlock() {
                 setOffset(15);
               }
               else{
-                const mergedArray = tourList.concat(getArrBySeq(result));
+
+                const mergedArray = tourList.slice().concat(getArrBySeq(result));
                 setTourList(mergedArray);
                 setOffset(prevOffset => prevOffset + 15);
+              }
+             
+              for(let item in result){
+                let tourImgs = result[item]["file"];
+                if(Array.isArray(tourImgs)){
+                  tourImgs.map(tourImg=>{
+                    const img = new Image();
+                    img.src = "https://ap9.ragic.com/sims/file.jsp?a=js1031222&f="+tourImg;
+                  })
+                }else{
+                  const img = new Image();
+                  img.src = "https://ap9.ragic.com/sims/file.jsp?a=js1031222&f="+tourImgs;
+                }
               }
             }
             setIfScrollToBottom(false);
@@ -72,13 +86,13 @@ export default function MainBlock() {
 }, [ifReFetchMainPage, ifScrollToBottom]);
 
 
-
   return (
     <main className="mainBlockContainer">
       <div className="mainBlock">
         {tourList.length === 0 && ifReFetchMainPage? tempTourList.map((item, index)=>{
           return <TempTourBlock key={index}/>
         }): tourList.map((item)=>{
+          
           if(item) return <TourBlock key={item["_ragicId"]} data={item}/>
         })
         }

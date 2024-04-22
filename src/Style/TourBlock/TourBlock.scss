@@ -31,14 +31,14 @@ $color-light-gray: rgb(209, 209, 209);
             left: 10px;
         }
         .tourItemImgContainer{
-            width: 100%;
+            width: 360px;
             height: 240px;
             background-color: $color-light-gray;
             transition: transform 0.4s ease;
             display: flex;
             .tourItemImg{        
-                min-width: 360px;
-                height: 100%;
+                width: 360px;
+                height: 240px;
                 object-fit: cover;
             }
         }

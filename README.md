@@ -10,7 +10,7 @@ https://jameschentw09.github.io/BestShop
 ## Schedule
 1. 會員註冊和登入功能(串接google登入)
 2. 會員行程編輯
-3. 強化 UI/UX
+3. 導入styled-components
 
 ## Database
 

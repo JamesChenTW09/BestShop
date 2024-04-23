@@ -11,7 +11,7 @@ export const addImgList = createSlice({
     },
     reducers: {
         addNewImgToList : (state, action) => {
-            state.imgList.push(action.payload);
+            state.imgList = [...state.imgList, action.payload];
             state.selectedMainImgIndex = state.imgList.length - 1;
         },
         setMainImgByIndex : (state, action) => {
@@ -20,26 +20,32 @@ export const addImgList = createSlice({
         //[{"cropDefaultPosition":{}, "cropConfirmPosition":{}},{}]
         setImgCropPositionByIndex : (state, action) =>{
             const {index, cropData} = action.payload;
-            state.cropImgPositionList[index]["cropConfirmPosition"] = cropData;
+            let newCropImgPositionList = JSON.parse(JSON.stringify(state.cropImgPositionList));
+            newCropImgPositionList[index]["cropConfirmPosition"] = cropData;
+            state.cropImgPositionList = newCropImgPositionList;
         },
         setImgCropDefaultPositionByIndex : (state, action) =>{
             const {index, cropData} = action.payload;
-            state.cropImgPositionList[index]["cropDefaultPosition"] = cropData;
+            let newCropImgPositionList = JSON.parse(JSON.stringify(state.cropImgPositionList));
+            newCropImgPositionList[index]["cropDefaultPosition"] = cropData;
+            state.cropImgPositionList = newCropImgPositionList;
         },
         addNewImgCropItem : state =>{
-            state.cropImgPositionList.push({"cropDefaultPosition":"", "cropConfirmPosition":""});
+            state.cropImgPositionList = [...state.cropImgPositionList, {"cropDefaultPosition":"", "cropConfirmPosition":""}]
         },
         addCropImgList : (state, action) =>{
-            state.cropImgList.push(action.payload);
+            state.cropImgList = [...state.cropImgList, action.payload];
         },
         removeAllCropList: state =>{
             state.cropImgList = [];
         },
         removeImgFromList : (state, action) => {
             let index = action.payload;
-            state.imgList.splice(index, 1);
-            state.cropImgList.splice(index, 1);
-            state.cropImgPositionList.splice(index, 1);
+
+            state.imgList = state.imgList.filter((item, idx)=> idx !== index);
+            state.cropImgList = state.cropImgList.filter((item, idx)=> idx !== index);
+            state.cropImgPositionList = state.cropImgPositionList.filter((item, idx)=> idx !== index);
+
             if(state.selectedMainImgIndex === index){
                 state.selectedMainImgIndex = 0;
             }else{

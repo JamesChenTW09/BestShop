@@ -11,7 +11,7 @@ export const toggleTourBlock = createSlice({
       setIfShowBlockDetail:(state,action) => {
         const {ifShow, id} = action.payload
         document.querySelector("html").style.overflowY = ifShow? "hidden" : "auto";
-        state.tourDetailBlock[id] = ifShow;
+        state.tourDetailBlock = {...state.tourDetailBlock, [id]:ifShow};
       },
       setIfshowAddEventBlock: (state, action) => {
         const ifShow = action.payload;

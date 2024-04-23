@@ -98,8 +98,9 @@ $color-light-gray: rgb(209, 209, 209);
             margin: 24px 0px;
             .tourItemImgContainer{
                 height: 215px;
-                .tourItemImg{        
-                    min-width: 320px;
+                .tourItemImg{ 
+                    height: 215px;
+                    width: 320px;
                 }
             }
         }

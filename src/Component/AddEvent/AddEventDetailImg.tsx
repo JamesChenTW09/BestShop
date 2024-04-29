@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import React,{ useState } from 'react';
 import "../../Style/AddEvent/AddEventDetailImg.scss"
+import { RootState } from "../../app/store"
+
 import {  useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
-export default function AddEventDetailImg() {
-    const cropImgList = useSelector((state) => state.addImgList.cropImgList);
-    const screenWidth = useSelector((state) => state.screenSize.screenWidth);
+const AddEventDetailImg: React.FC = () => {
+    const cropImgList = useSelector((state:RootState) => state.addImgList.cropImgList);
+    const screenWidth = useSelector((state:RootState) => state.screenSize.screenWidth);
     const smallScreen900 = screenWidth <= 900;
     const imgScrollWidth = smallScreen900? 320 : 480;
 
@@ -16,13 +18,13 @@ export default function AddEventDetailImg() {
     const [imgTranslate, setImgTranslate] = useState(0);
     const [showArrow, setShowArrow] = useState(false);
 
-    const handleShowNextImg = (e)=>{
+    const handleShowNextImg = (e: React.MouseEvent<HTMLDivElement>)=>{
       e.stopPropagation();
       let maxTranslate = (cropImgList.length - 1) * -imgScrollWidth;
       if(imgTranslate === maxTranslate) return;
       setImgTranslate(preState => preState - imgScrollWidth);
     }
-    const handleShowPreImg = (e)=>{
+    const handleShowPreImg = (e: React.MouseEvent<HTMLDivElement>)=>{
       e.stopPropagation();
       if(imgTranslate === 0) return;
       setImgTranslate(preState => preState + imgScrollWidth);
@@ -50,3 +52,5 @@ export default function AddEventDetailImg() {
     </div>
   )
 }
+
+export default AddEventDetailImg;

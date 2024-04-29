@@ -1,20 +1,26 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { RootState } from "../../app/store"
 import "../../Style/AddEvent/AddMoreImgBlock.scss"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import {  useDispatch, useSelector } from 'react-redux';
-import { removeImgFromList, setMainImgByIndex } from '../../features/handleAddImgs/addImgList.js';
+import { removeImgFromList, setMainImgByIndex } from '../../features/handleAddImgs/addImgList';
 
 
-export default function AddMoreImgBlock({ item, index}) {
-    const imgList = useSelector((state) => state.addImgList.imgList);
+interface AddMoreImgBlock{
+    item:string,
+    index: number
+}
+
+const AddMoreImgBlock: React.FC<AddMoreImgBlock> = ({item, index}) => {
+    const imgList = useSelector((state:RootState) => state.addImgList.imgList);
     const dispatch = useDispatch();
 
     const [showDeleteImgIcon, setShowDeleteImgIcon] = useState(false);
 
-    const removeImg = (e, index)=>{
+    const removeImg = (e: React.MouseEvent<HTMLDivElement>, index: number)=>{
         e.stopPropagation();
         if(imgList.length === 1) return;
         dispatch(removeImgFromList(index))
@@ -32,3 +38,5 @@ export default function AddMoreImgBlock({ item, index}) {
         </div>
   )
 }
+
+export default AddMoreImgBlock;

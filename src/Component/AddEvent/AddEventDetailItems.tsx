@@ -1,22 +1,32 @@
 import "../../Style/AddEvent/AddEventDetailItems.scss"
-import { setItemDetailByIndex, removeItemDetailByIndex } from '../../features/handleInput/addItemInputObj.js';
+import { setItemDetailByIndex, removeItemDetailByIndex } from '../../features/handleInput/addItemInputObj';
 import {  useDispatch } from 'react-redux';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faStar as clickStar} from '@fortawesome/free-solid-svg-icons'
 import {faStar as unclickStar, faTrashCan} from '@fortawesome/free-regular-svg-icons'
-import { useState } from "react";
+import React, { useState } from "react";
 
-export default function AddTimeDetail({data, index}) {
+interface AddTimeDetail{
+    data:{
+        starCount : number,
+        price : string,
+        name : string,
+        id:string
+    },
+    index:number
+}
+
+const AddTimeDetail: React.FC<AddTimeDetail> = ({data, index}) => {
     const dispatch = useDispatch();
-    const handleInputChange = (e)=>{
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
         const { name, value } = e.target;
         dispatch(setItemDetailByIndex({name, value, index}));
     }
     const [starCount, setStarCount] = useState(0);
     const starList = [1,2,3,4,5];
-    const handleStarClick = (item)=>{
+    const handleStarClick = (item: number)=>{
         if(item === starCount){
             setStarCount(0);
             dispatch(setItemDetailByIndex({name:"starCount", value:0, index}));
@@ -48,3 +58,5 @@ export default function AddTimeDetail({data, index}) {
     </div>
   )
 }
+
+export default AddTimeDetail;

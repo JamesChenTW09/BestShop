@@ -1,14 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { CropImgPosition } from '../../Types/Types';
 
+interface AddImgListState{
+    imgList : string[],
+    cropImgList : string[],
+    cropImgPositionList : CropImgPosition[],
+    selectedMainImgIndex : number,
+}
+const initialState: AddImgListState  = {
+    imgList : [],
+    cropImgList : [],
+    cropImgPositionList : [],
+    selectedMainImgIndex : 0,
+}
 
 export const addImgList = createSlice({
     name: 'addImgList',
-    initialState: {
-        imgList : [],
-        cropImgList : [],
-        cropImgPositionList : [],
-        selectedMainImgIndex : 0,
-    },
+    initialState,
     reducers: {
         addNewImgToList : (state, action) => {
             state.imgList = [...state.imgList, action.payload];

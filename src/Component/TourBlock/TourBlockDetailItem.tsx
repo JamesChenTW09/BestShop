@@ -2,9 +2,13 @@ import "../../Style/TourBlock/TourBlockDetailItem.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faStar as clickStar } from '@fortawesome/free-solid-svg-icons'
 import {faStar as unClickStar } from '@fortawesome/free-regular-svg-icons'
+import React from "react";
+import { TourSubObjectItem } from '../../Types/Types';
 
-
-export default function TourBlockDetailItem({data}) {
+interface TourDetailSubObjectItem{
+  data:TourSubObjectItem
+}
+const TourBlockDetailItem: React.FC<TourDetailSubObjectItem> = ({data}) => {
   const {index, name, price, stars } = data;
   const starCountArr = [1,2,3,4,5];
   const itemIndex = Number(index) +1;
@@ -25,3 +29,6 @@ export default function TourBlockDetailItem({data}) {
     </div>
   )
 }
+
+
+export default TourBlockDetailItem;

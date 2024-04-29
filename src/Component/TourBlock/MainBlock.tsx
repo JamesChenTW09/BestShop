@@ -1,24 +1,26 @@
 import React, { Suspense, useState, useEffect } from "react";
+import { RootState } from "../../app/store"
 import "../../Style/TourBlock/MainBlock.scss"
-import TourBlock from "./TourBlock.js";
-import TempTourBlock from "./TempTourBlock.js";
-import { setStateArrValueByIndex, getArrBySeq, getTourApi, fetchWithAuth, debounce } from "../../CommonFunction/commonFunction.js" 
+import TourBlock from "./TourBlock";
+import TempTourBlock from "./TempTourBlock";
+import { TourObjectItem } from "../../Types/Types";
+import { setStateArrValueByIndex, getArrBySeq, getTourApi, fetchWithAuth, debounce } from "../../CommonFunction/commonFunction" 
 import { useSelector, useDispatch } from 'react-redux';
-import { setIfFetchMainPage } from '../../features/handleBoolean/toggleFetchData.js';
+import { setIfFetchMainPage } from '../../features/handleBoolean/toggleFetchData';
 
-const AddEventComponent = React.lazy(() => import('../AddEvent/AddEventBlock.js'));
+const AddEventComponent = React.lazy(() => import('../AddEvent/AddEventBlock'));
 
-export default function MainBlock() {
+const MainBlock: React.FC = () => {
   const tempTourList = Array.from({length:10});
-  const [tourList, setTourList] = useState([]);
+  const [tourList, setTourList] = useState<TourObjectItem[]>([]);
   const [ifScrollToBottom, setIfScrollToBottom] = useState(false);
   const [offset, setOffset] = useState(0);  
 
   const dispatch = useDispatch();
-  const addEventBlock = useSelector(state => state.toggleBlock.addEventBlock);
-  const searchText = useSelector(state => state.searchText.searchText);
-  const ifReFetchMainPage = useSelector(state => state.toggleFetchData.ifReFetchMainPage);
-  const orderKey = useSelector(state => state.orderObj.orderKey);
+  const addEventBlock = useSelector((state:RootState) => state.toggleBlock.addEventBlock);
+  const searchText = useSelector((state:RootState) => state.searchText.searchText);
+  const ifReFetchMainPage = useSelector((state:RootState) => state.toggleFetchData.ifReFetchMainPage);
+  const orderKey = useSelector((state:RootState) => state.orderObj.orderKey);
 
   
   useEffect(() => {
@@ -55,7 +57,6 @@ export default function MainBlock() {
                 setOffset(15);
               }
               else{
-
                 const mergedArray = tourList.slice().concat(getArrBySeq(result));
                 setTourList(mergedArray);
                 setOffset(prevOffset => prevOffset + 15);
@@ -92,7 +93,6 @@ export default function MainBlock() {
         {tourList.length === 0 && ifReFetchMainPage? tempTourList.map((item, index)=>{
           return <TempTourBlock key={index}/>
         }): tourList.map((item)=>{
-          
           if(item) return <TourBlock key={item["_ragicId"]} data={item}/>
         })
         }
@@ -106,3 +106,6 @@ export default function MainBlock() {
   )
 }
 
+
+
+export default MainBlock;

@@ -1,25 +1,31 @@
-import { useState, useEffect } from 'react';
-import TourBlockDetailItem from './TourBlockDetailItem.js'
+import React, { useState, useEffect } from 'react';
+import TourBlockDetailItem from './TourBlockDetailItem'
+import { TourObjectItem, TourSubObjectItem } from '../../Types/Types';
 import "../../Style/TourBlock/TourBlockDetail.scss"
 
-import { getTourApi, fetchWithAuth } from "../../CommonFunction/commonFunction.js"
+import { getTourApi, fetchWithAuth } from "../../CommonFunction/commonFunction"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark,  faHeart as like  } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as dislike } from '@fortawesome/free-regular-svg-icons'
 
 import { useDispatch } from 'react-redux';
-import { setIfShowBlockDetail } from '../../features/handleBoolean/toggleBlock.js';
+import { setIfShowBlockDetail } from '../../features/handleBoolean/toggleBlock';
+
+interface TourDetailObjectItem {
+  data:TourObjectItem,
+  likeHeartCount: number,
+  setLikeHeartCount: React.Dispatch<React.SetStateAction<number>>
+}
 
 
-
-export default function TourBlockDetail({data, likeHeartCount, setLikeHeartCount}) {
+const TourBlockDetail: React.FC<TourDetailObjectItem> =  ({data, likeHeartCount, setLikeHeartCount}) => {
   let { file, id, name, content, address, type, visitTime } = data;
   const ifMultiImg = Array.isArray(file);
 
   const [likeHeart, setLikeHeart] = useState(false);
-  const [orderItemDetail, setOrderItemDetail] = useState([]);
-  const [mainImg, setMainImg] = useState("");
+  const [orderItemDetail, setOrderItemDetail] = useState<TourSubObjectItem[]>([]);
+  const [mainImg, setMainImg] = useState<string | string[]>("");
 
   const dispatch = useDispatch();
 
@@ -32,17 +38,17 @@ export default function TourBlockDetail({data, likeHeartCount, setLikeHeartCount
     
   const setItemDetailOrder = () =>{
     if(data["_subtable_1000139"]){
-      let itemDetailArr = Object.values(data["_subtable_1000139"]);
-      let newItemDetailArr = [];
+      let itemDetailArr:TourSubObjectItem[] = Object.values(data["_subtable_1000139"]);
+      let newItemDetailArr: TourSubObjectItem[] = [];
       itemDetailArr.forEach(item=>{
-        newItemDetailArr[item["index"]] = item;
+        newItemDetailArr[Number(item.index)] = item;
       })
       setOrderItemDetail(newItemDetailArr);
     }
   }
 
 
-  const handleLikeClick = (e) => {
+  const handleLikeClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     let currentLikeCount = likeHeartCount;
     if(likeHeart){
@@ -51,13 +57,13 @@ export default function TourBlockDetail({data, likeHeartCount, setLikeHeartCount
         currentLikeCount--;
     } 
     else{
-        localStorage.setItem(id+"_like", 1);
+        localStorage.setItem(id+"_like", "1");
         setLikeHeartCount(preState => preState+1);
         currentLikeCount++;
     }
     setLikeHeart(preState => !preState);
     const submitFormData = new FormData();
-    submitFormData.append("1000140", currentLikeCount);
+    submitFormData.append("1000140", currentLikeCount.toString());
     try{
       fetchWithAuth("post", getTourApi(id), submitFormData)
     }catch(e){
@@ -113,3 +119,6 @@ export default function TourBlockDetail({data, likeHeartCount, setLikeHeartCount
     </>
   )
 }
+
+
+export default TourBlockDetail;

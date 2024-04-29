@@ -1,34 +1,33 @@
 import React, {useState} from 'react'
 import "../../Style/AddEvent/AddEventBlock.scss"
-import AddEventDetailInfo from './AddEventDetailInfo.js';
-import AddEventImgCrop from './AddEventImgCrop.js';
-import AddEventDetailImg from './AddEventDetailImg.js';
+import AddEventDetailInfo from './AddEventDetailInfo';
+import AddEventImgCrop from './AddEventImgCrop';
+import AddEventDetailImg from './AddEventDetailImg';
+import { RootState } from "../../app/store"
 
-import { createCurrentDate, getTourApi, fetchWithAuth } from "../../CommonFunction/commonFunction.js" 
-import { ADDTOURSTEP } from "../../CommonFunction/Const.js" 
+import { createCurrentDate, getTourApi, fetchWithAuth } from "../../CommonFunction/commonFunction" 
+import { ADDTOURSTEP } from "../../CommonFunction/Const" 
 import he from 'he';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import {  useDispatch, useSelector } from 'react-redux';
-import {  setIfshowAddEventBlock  } from '../../features/handleBoolean/toggleBlock.js';
-import {  setIfFetchMainPage  } from '../../features/handleBoolean/toggleFetchData.js';
-import {  setItemDetailArrToDefault  } from '../../features/handleInput/addItemInputObj.js';
-import { updateWarnText, showWarnBlock, setWarnConfirmFunc, hideScroll } from '../../features/handleBoolean/toggleWarnBlock.js';
-import { addCropImgList,addNewImgCropItem, addNewImgToList, removeAllImgFromList, removeAllCropList } from '../../features/handleAddImgs/addImgList.js';
+import {  setIfshowAddEventBlock  } from '../../features/handleBoolean/toggleBlock';
+import {  setIfFetchMainPage  } from '../../features/handleBoolean/toggleFetchData';
+import {  setItemDetailArrToDefault  } from '../../features/handleInput/addItemInputObj';
+import { updateWarnText, showWarnBlock, setWarnConfirmFunc, hideScroll } from '../../features/handleBoolean/toggleWarnBlock';
+import { addCropImgList,addNewImgCropItem, addNewImgToList, removeAllImgFromList, removeAllCropList } from '../../features/handleAddImgs/addImgList';
 
-
-
-export default function AddEventBlock() {
+const AddEventBlock: React.FC = () => {
     const [saving, setSaving] = useState(false);
     const [ifImgLoading, setIfImgLoading] = useState(false);
     const [formData, setFormData] = useState({loc:"台北市", type:"餐廳", name:"", content:"", date:"", mainStarCount:""});
     const [steps, setSteps] = useState(ADDTOURSTEP.INSERTIMG);
 
-    const addItemDetailArr = useSelector((state) => state.addItemInputObj.addItemDetailArr);
-    const cropImgPositionList = useSelector((state) => state.addImgList.cropImgPositionList);
-    const screenWidth = useSelector((state) => state.screenSize.screenWidth);
+    const addItemDetailArr = useSelector((state:RootState) => state.addItemInputObj.addItemDetailArr);
+    const cropImgPositionList = useSelector((state:RootState) => state.addImgList.cropImgPositionList);
+    const screenWidth = useSelector((state:RootState) => state.screenSize.screenWidth);
     const smallScreen900 = screenWidth <= 900;
     const dispatch = useDispatch();
 
@@ -39,20 +38,22 @@ export default function AddEventBlock() {
         dispatch(setIfshowAddEventBlock(false));
     } 
 
-    const uploadNewImg = (e)=>{
+    const uploadNewImg = (e: React.ChangeEvent<HTMLInputElement>)=>{
         if(ifImgLoading) return;
         if(steps !== ADDTOURSTEP.IMGCROP) setSteps(ADDTOURSTEP.IMGCROP);
         dispatch(addNewImgCropItem());
         setIfImgLoading(true);
         setTimeout(() => {
-            let file = e.target.files[0];
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                setIfImgLoading(false);
-                dispatch(addNewImgToList(e.target.result))
-        };
-        reader.readAsDataURL(file);
-        e.target.value = "";
+            if(e.target.files){
+                let file = e.target.files[0];
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    setIfImgLoading(false);
+                    if(e.target !== null) dispatch(addNewImgToList(e.target.result))
+                };
+                reader.readAsDataURL(file);
+                e.target.value = "";
+            }
         }, 400);
     }
 
@@ -61,7 +62,6 @@ export default function AddEventBlock() {
     if(steps === ADDTOURSTEP.INSERTIMG) return;
     //empty check
     let ifPreventSave = false;
-    console.log(formData);
     if(!formData["name"]){
         dispatch(updateWarnText("請輸入店家名稱"));
         ifPreventSave = true;
@@ -84,7 +84,7 @@ export default function AddEventBlock() {
     }
     let emptySubName = addItemDetailArr.find(item=>item["name"].length === 0);
     let emptySubPrice = addItemDetailArr.find(item=>item["price"].length === 0);
-    let stringSubPrice = addItemDetailArr.find(item=>!isFinite(item["price"]));
+    let stringSubPrice = addItemDetailArr.find(item=>!isFinite(Number(item["price"])));
     let emptySubStar = addItemDetailArr.find(item=>item["starCount"] === 0);
     if(!ifPreventSave){
         if(emptySubName){
@@ -113,12 +113,12 @@ export default function AddEventBlock() {
 
     setTimeout(() => {
         let imgList = document.querySelectorAll(".finalImgsItem");
-        async function convertImagesToBlob(imgList){
+        async function convertImagesToBlob(imgList: NodeListOf<Element>):Promise<Blob[]>{
             const promises = [];
             for(let i = 0; i < imgList.length; i++){
-                let imgItem = imgList[i];
+                let imgItem = imgList[i] as CanvasImageSource;
                 const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
+                const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
                 canvas.width = 900;
                 canvas.height = 600;
@@ -126,13 +126,13 @@ export default function AddEventBlock() {
 
                 const promise = new Promise(resolve => {
                     canvas.toBlob(blob => {
-                      resolve(new File([blob], "shopImage.webp", { type: "image/webp" }));
+                        if(blob !== null) resolve(new File([blob], "shopImage.webp", { type: "image/webp" }));
                     },'image/webp', 0.8);
                   });
               
                 promises.push(promise);
             }
-            const blobs = await Promise.all(promises);
+            const blobs = await Promise.all(promises) as unknown as Promise<Blob[]>;
             return blobs;
         }
 
@@ -149,20 +149,20 @@ export default function AddEventBlock() {
             res.forEach(item=>{
                 submitFormData.append("1000148", item);   
             })
-            submitFormData.append("1000140", 0);
-            submitFormData.append("1000141", 0);
+            submitFormData.append("1000140", "0");
+            submitFormData.append("1000141", "0");
 
             for(let i = 1; i <= addItemDetailArr.length; i++){
               const item = addItemDetailArr[i-1];
-              submitFormData.append("1000134_"+-i, i-1);
+              submitFormData.append("1000134_"+-i, (i-1).toString());
               submitFormData.append("1000135_"+-i,he.escape(item["price"]));
               submitFormData.append("1000136_"+-i,he.escape(item["name"]));
-              submitFormData.append("1000169_"+-i,item["starCount"]);
+              submitFormData.append("1000169_"+-i,item["starCount"].toString());
             }
 
             fetchWithAuth("post", getTourApi(), submitFormData).then(result=>{
                 if(result["status"] === "SUCCESS") {
-                    localStorage.setItem(result["ragicId"]+"_owner", 1);
+                    localStorage.setItem(result["ragicId"]+"_owner", "1");
                     setSaving(false);
                     removeAddEvent();
                     dispatch(setIfFetchMainPage(true));
@@ -173,12 +173,12 @@ export default function AddEventBlock() {
    }, 500);
   }
   
-const cropImgUtil = (index, img)=>{
+const cropImgUtil = (index: number, img: CanvasImageSource)=>{
     const {cropDefaultPosition, cropConfirmPosition} = cropImgPositionList[index];
     let cropDetail = cropDefaultPosition;
     if(cropConfirmPosition) cropDetail = cropConfirmPosition;
     const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
     canvas.width = cropDetail.width;
     canvas.height = cropDetail.height;  
@@ -202,7 +202,7 @@ const toStepInsertData = ()=>{
     setTimeout(() => {
         let insertImgs = document.querySelectorAll(".addMoreImgsItem");
         for(let i = 0; i < insertImgs.length; i++){
-            cropImgUtil(i, insertImgs[i])
+            cropImgUtil(i, insertImgs[i] as CanvasImageSource)
         }
         setSteps(ADDTOURSTEP.INSERTDATA);
         setSaving(false);
@@ -267,3 +267,5 @@ const toPreviousStep = ()=>{
     </>
   )
 }
+
+export default AddEventBlock;

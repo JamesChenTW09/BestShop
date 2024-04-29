@@ -1,6 +1,7 @@
 import "../../Style/TourBlock/TourBlock.scss"
+import React from "react";
 
-export default function TempTourBlock() {
+const TempTourBlock: React.FC = () => {
   return (
     <section className='tourBlockItemContainer'> 
         <div className='tourBlockItem' >
@@ -9,3 +10,4 @@ export default function TempTourBlock() {
     </section>
   )
 }
+export default TempTourBlock;

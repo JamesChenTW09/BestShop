@@ -1,33 +1,38 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "../../Style/AddEvent/AddEventImgCrop.scss"
-import AddImgBlock from './AddMoreImgBlock.js';
+import AddImgBlock from './AddMoreImgBlock';
+import { RootState } from "../../app/store"
 
+import { CropImgPositionItem } from '../../Types/Types';
 import Cropper from 'react-easy-crop';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 import {  useDispatch, useSelector } from 'react-redux';
-import {  setImgCropPositionByIndex, setImgCropDefaultPositionByIndex } from '../../features/handleAddImgs/addImgList.js';
+import {  setImgCropPositionByIndex, setImgCropDefaultPositionByIndex } from '../../features/handleAddImgs/addImgList';
 
 
+interface ifImgLoading{
+    ifImgLoading:boolean
+}
 
 
-export default function AddImgCrop({ifImgLoading}) {
-    const imgList = useSelector((state) => state.addImgList.imgList);
-    const selectedMainImgIndex = useSelector((state) => state.addImgList.selectedMainImgIndex);
-    const cropImgPositionList = useSelector((state) => state.addImgList.cropImgPositionList);
+const AddImgCrop: React.FC<ifImgLoading> = ({ifImgLoading}) => {
+    const imgList = useSelector((state:RootState) => state.addImgList.imgList);
+    const selectedMainImgIndex = useSelector((state:RootState) => state.addImgList.selectedMainImgIndex);
+    const cropImgPositionList = useSelector((state:RootState) => state.addImgList.cropImgPositionList);
 
-    const imgCropDefaultPosition = cropImgPositionList[selectedMainImgIndex]["cropDefaultPosition"];
-    const imgCropConfirmPosition = cropImgPositionList[selectedMainImgIndex]["cropConfirmPosition"];
+    const imgCropDefaultPosition:CropImgPositionItem | string= cropImgPositionList[selectedMainImgIndex]["cropDefaultPosition"];
+    const imgCropConfirmPosition:CropImgPositionItem | string= cropImgPositionList[selectedMainImgIndex]["cropConfirmPosition"];
     const dispatch = useDispatch();
     
     const [crop, setCrop] = useState({ x: 0, y: 0});
     const [zoom, setZoom] = useState(1);
 
-    const [croppedAreaPixel, setCroppedAreaPixel] = useState(null);
-    let currentCropAreaPixel = null;
+    const [croppedAreaPixel, setCroppedAreaPixel] = useState<CropImgPositionItem>();
+    let currentCropAreaPixel: CropImgPositionItem;
   
-    const onCropComplete = (croppedArea, croppedAreaPixels) => {
+    const onCropComplete = (croppedArea: CropImgPositionItem, croppedAreaPixels: CropImgPositionItem) => {
       setCroppedAreaPixel(croppedAreaPixels);
       currentCropAreaPixel = croppedAreaPixels;
     }
@@ -63,7 +68,7 @@ export default function AddImgCrop({ifImgLoading}) {
                     onCropComplete={onCropComplete}
                     onZoomChange={setZoom}
                     onInteractionEnd={onInteractionEnd}
-                    initialCroppedAreaPixels={imgCropConfirmPosition && !ifImgLoading? imgCropConfirmPosition:null}
+                    initialCroppedAreaPixels={typeof imgCropConfirmPosition !== "string" && !ifImgLoading? imgCropConfirmPosition : undefined}
                 />
             </div>
             <div className='addMoreImgsContainer'>
@@ -84,3 +89,6 @@ export default function AddImgCrop({ifImgLoading}) {
     </div>
   )
 }
+
+
+export default AddImgCrop;

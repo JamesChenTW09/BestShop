@@ -7,13 +7,12 @@ import toggleDropDown from '../features/handleBoolean/toggleDropDown';
 import searchText from '../features/handleInput/searchText';
 import addItemInputObj from '../features/handleInput/addItemInputObj';
 import orderObj from "../features/handleInput/orderObj";
-import titleHint from '../features/handleInput/titleHint';
 
 import screenSize from '../features/handleScreenSize/screenSize';
 import addImgList from '../features/handleAddImgs/addImgList';
 
 
-export default configureStore({
+const store = configureStore({
   reducer: {
     toggleBlock,
     searchText,
@@ -24,6 +23,9 @@ export default configureStore({
     screenSize,
     orderObj,
     addImgList,
-    titleHint
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export default store;

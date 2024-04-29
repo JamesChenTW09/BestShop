@@ -1,47 +1,57 @@
-import { useState, useRef } from "react"
-import NavOrderSelect from "./NavOrderSelect.js"
+import React, { useState, useRef } from "react"
+import { RootState } from "../../app/store"
+import NavOrderSelect from "./NavOrderSelect"
 import "../../Style/Header/NavTypeSelect.scss"
 
-import { TYPELIST } from "../../CommonFunction/Const.js"
+import { TYPELIST } from "../../CommonFunction/Const"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight , faArrowLeft, faUtensils, faMartiniGlass, faMugHot, faCow, faPizzaSlice, faBurger, faFish, faCheese, faBowlFood, faBreadSlice, faBacon} from '@fortawesome/free-solid-svg-icons'
 
 import {  useDispatch, useSelector } from 'react-redux';
-import {  setIfFetchMainPage  } from '../../features/handleBoolean/toggleFetchData.js';
-import {  setSearchValue  } from '../../features/handleInput/searchText.js';
+import {  setIfFetchMainPage  } from '../../features/handleBoolean/toggleFetchData';
+import {  setSearchValue  } from '../../features/handleInput/searchText';
 
-export default function NavTypeSelect() {
+
+  interface typeSearchContainerCount{
+    scrollWidth: number,
+    clientWidth: number,
+    scrollLeft: number
+  }
+
+const NavTypeSelect:React.FC = () => {
     const dispatch = useDispatch();
-    const searchText = useSelector(state => state.searchText.searchText);
-    const screenWidth = useSelector(state => state.screenSize.screenWidth);
+    const searchText = useSelector((state:RootState) => state.searchText.searchText);
+    const screenWidth = useSelector((state:RootState) => state.screenSize.screenWidth);
     const smallScreen800 = screenWidth <= 800;
 
 
-    const typeSearchContainer = useRef(null);
+    const typeSearchContainer = useRef<HTMLDivElement>(null);
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(true);
 
-    const handleScrollArrow = (position)=>{
+    const handleScrollArrow = (position: string)=>{
         const typeContainerEle = typeSearchContainer.current;
-        const typeContainerWidth = typeContainerEle.getBoundingClientRect().width;
-        const typeContainerScrollLeft = typeContainerEle.scrollLeft;
-        if (typeContainerEle) {
-            typeContainerEle.scrollTo({
-              left : position === "left"? typeContainerScrollLeft - typeContainerWidth + 75 : typeContainerScrollLeft + typeContainerWidth - 75,
-              behavior: 'smooth',
-            });          
+        if(typeContainerEle){
+            const typeContainerWidth = typeContainerEle.getBoundingClientRect().width;
+            const typeContainerScrollLeft = typeContainerEle.scrollLeft;
+            if (typeContainerEle) {
+                typeContainerEle.scrollTo({
+                  left : position === "left"? typeContainerScrollLeft - typeContainerWidth + 75 : typeContainerScrollLeft + typeContainerWidth - 75,
+                  behavior: 'smooth',
+                });          
+            }
         }
     }
 
     const handleScrolltypes = ()=>{
-        const {scrollWidth, clientWidth, scrollLeft} = typeSearchContainer.current;
+        const {scrollWidth, clientWidth, scrollLeft} = typeSearchContainer.current as typeSearchContainerCount;
         const ifShowRightArrow = scrollWidth - (clientWidth + scrollLeft) >= 1;
         const ifShowLeftArrow = scrollLeft > 10;
         if(showLeftArrow !== ifShowLeftArrow) setShowLeftArrow(ifShowLeftArrow);
         if(showRightArrow !== ifShowRightArrow) setShowRightArrow(ifShowRightArrow);
     }
 
-    const handleSelectType = (item)=>{
+    const handleSelectType = (item: string)=>{
         if(searchText === item) dispatch(setSearchValue(""));
         else dispatch(setSearchValue(item));
         dispatch(setIfFetchMainPage(true)); 
@@ -83,3 +93,5 @@ export default function NavTypeSelect() {
     </>
   )
 }
+
+export default NavTypeSelect;

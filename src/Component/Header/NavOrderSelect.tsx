@@ -1,31 +1,33 @@
 import "../../Style/Header/NavOrderSelect.scss"
+import { RootState } from "../../app/store"
 import filterSvg from "../../Imgs/filter.svg"
 
 import {  useDispatch, useSelector } from 'react-redux';
-import {  setIfFetchMainPage  } from '../../features/handleBoolean/toggleFetchData.js';
-import { setOrderObj } from '../../features/handleInput/orderObj.js';
-import {  showDropDown, removeAllDropDown  } from '../../features/handleBoolean/toggleDropDown.js';
+import {  setIfFetchMainPage  } from '../../features/handleBoolean/toggleFetchData';
+import { setOrderObj } from '../../features/handleInput/orderObj';
+import {  showDropDown, removeAllDropDown  } from '../../features/handleBoolean/toggleDropDown';
+import React from "react";
 
-export default function NavTagSelect() {
-    const orderText = useSelector((state) => state.orderObj.orderText);
-
-    const ifShowOrderDropDown = useSelector(state => state.toggleDropDown.orderDropDown);
-    const screenWidth = useSelector(state => state.screenSize.screenWidth);
+const NavTagSelect: React.FC = () => {
+    const orderText = useSelector((state:RootState) => state.orderObj.orderText);
+    const ifShowOrderDropDown = useSelector((state:RootState) => state.toggleDropDown.orderDropDown);
+    const screenWidth = useSelector((state:RootState) => state.screenSize.screenWidth);
     const smallScreen800 = screenWidth <= 800;
     const smallScreen550 = screenWidth <= 550;
     const dispatch = useDispatch();
+    
 
-    const handleChangeOrder = (orderKey,e) => {
-        const orderText = e.target.textContent;
+    const handleChangeOrder = (orderKey: number,e: React.MouseEvent<HTMLDivElement>) => {
+        const orderText = (e.target as HTMLDivElement).textContent as string;
         dispatch(setOrderObj({orderKey, orderText}));
         dispatch(setIfFetchMainPage(true));
     };
 
-    const toggleOrderDropDown = (e)=>{
+    const toggleOrderDropDown = (e: React.MouseEvent<HTMLDivElement>)=>{
         e.stopPropagation();
         dispatch(removeAllDropDown());
         dispatch(showDropDown({key:"orderDropDown", ifShow:!ifShowOrderDropDown}));
-       }
+    }
   return (
     <div className="orderListContainer" onClick={toggleOrderDropDown}>
         <div className="orderListButton flexCenter">
@@ -46,3 +48,4 @@ export default function NavTagSelect() {
     </div>
   )
 }
+export default NavTagSelect;

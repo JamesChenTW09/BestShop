@@ -1,8 +1,14 @@
 import { APIKEY } from "./Const";
+import {TourObjectItem, IndexedObject} from "../Types/Types"
 
 
-export async function fetchWithAuth(method, api, body){
-    const fetchSetUp = {
+interface FetchBody{
+    method:string,
+    headers:Headers,
+    body?:FormData
+}
+export async function fetchWithAuth(method: string, api: string, body?:FormData){
+    const fetchSetUp:FetchBody = {
         method,
         "headers":new Headers({
             "Authorization": APIKEY
@@ -13,8 +19,8 @@ export async function fetchWithAuth(method, api, body){
     const result = await response.json();
     return result;
 }
-export function setStateArrValueByIndex(index, value, fn){
-    fn(prevState => {
+export function setStateArrValueByIndex(index: number, value: TourObjectItem, fn: (updateFn: (prevState: TourObjectItem[]) => TourObjectItem[]) => void): void {
+    fn((prevState: TourObjectItem[]) => {
         const updatedArray = prevState.slice();
         updatedArray[index] = value;
         return updatedArray;
@@ -22,7 +28,7 @@ export function setStateArrValueByIndex(index, value, fn){
 }
 
 // param obj is{1:{}, 2:{}}
-export function getArrBySeq(obj){
+export function getArrBySeq(obj: { [key: string]: IndexedObject }) : IndexedObject[]{
     let arr  = []
     for(let item in obj){
       let seq = obj[item]["_seq"];
@@ -31,12 +37,12 @@ export function getArrBySeq(obj){
     return arr;
 }
 
-export function getTagApi(id){
+export function getTagApi(id: string){
     if(id) return "https://ap9.ragic.com/js1031222/tour/4/"+id+"?api&v=3";
     else return "https://ap9.ragic.com/js1031222/tour/4?api&v=3";
 }
 
-export function getTourApi(id){
+export function getTourApi(id?: string){
     if(id) return "https://ap9.ragic.com/js1031222/tour/2/"+id+"?api&v=3";
     else return "https://ap9.ragic.com/js1031222/tour/2?api&v=3";
 }
@@ -44,19 +50,19 @@ export function getTourApi(id){
 export function createCurrentDate(){
     let currentDate = new Date();
     let year = currentDate.getFullYear();
-    let month = currentDate.getMonth() + 1;
-    let day = currentDate.getDate();
+    let month: number | string= currentDate.getMonth() + 1;
+    let day: number | string = currentDate.getDate();
     if (month < 10) month = '0' + month;
     if (day < 10) day = '0' + day;
     return year + "/" + month + "/" + day;
 }
 
-export function debounce(func, delay) {
-    let timerId;
+export function debounce(func: Function, delay: number): ()=> void {
+    let timerId: NodeJS.Timeout | undefined;
     return function() {
-      clearTimeout(timerId);
+      if(timerId !== undefined)clearTimeout(timerId);
       timerId = setTimeout(() => {
-        func.apply(this, arguments);
+        func.apply(null, arguments);
       }, delay);
     }
   }

@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
+import { RootState } from "../../app/store"
 import "../../Style/Header/Header.scss"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -6,26 +7,27 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 
 import {  useDispatch, useSelector } from 'react-redux';
-import {  setSearchValue  } from '../../features/handleInput/searchText.js';
-import {  setIfFetchMainPage  } from '../../features/handleBoolean/toggleFetchData.js';
-import {  setIfshowAddEventBlock  } from '../../features/handleBoolean/toggleBlock.js';
-import {  showDropDown, removeAllDropDown  } from '../../features/handleBoolean/toggleDropDown.js';
+import {  setSearchValue  } from '../../features/handleInput/searchText';
+import {  setIfFetchMainPage  } from '../../features/handleBoolean/toggleFetchData';
+import {  setIfshowAddEventBlock  } from '../../features/handleBoolean/toggleBlock';
+import {  showDropDown, removeAllDropDown  } from '../../features/handleBoolean/toggleDropDown';
 
-
-export default function Header() {
-  const searchInputRef = useRef();
+const Header: React.FC = () => {
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
-  const screenWidth = useSelector(state => state.screenSize.screenWidth);
-  const ifShowLogInDropDown = useSelector(state => state.toggleDropDown.logInDropDown);
+  const screenWidth = useSelector((state:RootState) => state.screenSize.screenWidth);
+  const ifShowLogInDropDown = useSelector((state:RootState) => state.toggleDropDown.logInDropDown);
   const smallScreen600 = screenWidth <= 600;
   
   const handleSearch = ()=>{
-    const searchValue = searchInputRef.current.value;
-    dispatch(setSearchValue(searchValue));
-    dispatch(setIfFetchMainPage(true));
+    if(searchInputRef.current){
+      const searchValue = searchInputRef.current.value;
+      dispatch(setSearchValue(searchValue));
+      dispatch(setIfFetchMainPage(true));
+    }
   }
 
- const handleToggleDropDown = (event)=>{
+ const handleToggleDropDown = (event: React.MouseEvent<HTMLInputElement>)=>{
   event.stopPropagation();
   dispatch(removeAllDropDown());
   dispatch(showDropDown({key:"logInDropDown", ifShow:!ifShowLogInDropDown}));
@@ -72,3 +74,5 @@ export default function Header() {
     </header>
   )
 }
+
+export default Header;

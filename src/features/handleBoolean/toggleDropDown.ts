@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+interface ShowDropDown{
+  key:string,
+  ifShow:boolean
+}
 
 export const toggleDropDown = createSlice({
     name: 'toggleDropDown',
@@ -9,8 +13,8 @@ export const toggleDropDown = createSlice({
     },
     reducers: {
         showDropDown: (state, action) => {
-          const {key, ifShow} = action.payload
-          state[key] = ifShow;
+          const {key, ifShow} = action.payload as ShowDropDown;
+          if(key === "logInDropDown" || key === "orderDropDown") state[key] = ifShow;
         },
         removeAllDropDown: state =>{
           state["logInDropDown"] = false;

@@ -1,20 +1,27 @@
 import React, { useState, Suspense } from 'react'
-import { getTourApi, fetchWithAuth } from "../../CommonFunction/commonFunction.js"
+import { getTourApi, fetchWithAuth } from "../../CommonFunction/commonFunction"
+import { TourObjectItem } from '../../Types/Types'
 import "../../Style/TourBlock/TourBlock.scss"
+import { RootState } from "../../app/store"
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as dislike, faStar as unClickStar } from '@fortawesome/free-regular-svg-icons'
 import { faEye, faArrowRight, faArrowLeft, faTrashCan, faStar as clickStar } from '@fortawesome/free-solid-svg-icons'
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setIfShowBlockDetail } from '../../features/handleBoolean/toggleBlock.js';
-import { updateWarnText, showWarnBlock, setWarnConfirmFunc } from '../../features/handleBoolean/toggleWarnBlock.js';
-import { setIfFetchMainPage } from '../../features/handleBoolean/toggleFetchData.js';
+import { setIfShowBlockDetail } from '../../features/handleBoolean/toggleBlock';
+import { updateWarnText, showWarnBlock, setWarnConfirmFunc } from '../../features/handleBoolean/toggleWarnBlock';
+import { setIfFetchMainPage } from '../../features/handleBoolean/toggleFetchData';
 
 
 const TourBlockDetail = React.lazy(() => import('./TourBlockDetail'));
 
-export default function TourBlock({data}) {
+interface TourData{
+    data:TourObjectItem
+}
+
+const TourBlock: React.FC<TourData> = ({data}) => {
     const { like, view, id, _ragicId, file, name, createTime, stars, address, type} = data; 
     const ifMultiImg = Array.isArray(file);
     const starCountArr = [1,2,3,4,5];
@@ -24,7 +31,7 @@ export default function TourBlock({data}) {
     const [viewCount, setViewCount] = useState(Number(view));
     const [showArrow, setShowArrow] = useState(false);
 
-    const ifShowBlockDetail = useSelector((state) => state.toggleBlock.tourDetailBlock[id]);
+    const ifShowBlockDetail = useSelector((state:RootState) => state.toggleBlock.tourDetailBlock[id]);
     const dispatch = useDispatch();
 
     const handleShowTourDetail = () => {
@@ -32,7 +39,7 @@ export default function TourBlock({data}) {
         setViewCount(preState => preState + 1);
         dispatch(setIfShowBlockDetail({id, ifShow:true}));
         const submitFormData = new FormData();
-        submitFormData.append("1000141", newViewCount);
+        submitFormData.append("1000141", newViewCount.toString());
         try{
             fetchWithAuth("post", getTourApi(id), submitFormData)
         }catch(e){
@@ -41,25 +48,25 @@ export default function TourBlock({data}) {
   }
 
   const [imgTranslate, setImgTranslate] = useState(0);
-  const handleShowNextImg = (e)=>{
+  const handleShowNextImg = (e: React.MouseEvent<HTMLDivElement>)=>{
     e.stopPropagation();
     let maxTranslate = (file.length - 1) * -360;
     if(imgTranslate === maxTranslate) return;
     setImgTranslate(preState => preState - 360);
   }
-  const handleShowPreImg = (e)=>{
+  const handleShowPreImg = (e: React.MouseEvent<HTMLDivElement>)=>{
     e.stopPropagation();
     if(imgTranslate === 0) return;
     setImgTranslate(preState => preState + 360);
   }
 
-  const deleteTourBlock = (e)=>{
+  const deleteTourBlock = (e: React.MouseEvent)=>{
     e.stopPropagation();
     dispatch(updateWarnText("確定刪除嗎"));
     dispatch(showWarnBlock(true));
     setWarnConfirmFunc(removeTourBlock);
   }
-  const removeTourBlock = (e)=>{
+  const removeTourBlock = (e: React.MouseEvent)=>{
     fetchWithAuth("delete", getTourApi(_ragicId)).then(()=>{
         dispatch(setIfFetchMainPage(true));
     })
@@ -121,3 +128,5 @@ export default function TourBlock({data}) {
     </section>
   )
 }
+
+export default TourBlock;

@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react'
+import { RootState } from "../app/store"
 import "../Style/Util/Warning.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from 'react-redux';
-import { removeWarnText, showWarnBlock, setWarnConfirmFunc, useExternalFunction } from '../features/handleBoolean/toggleWarnBlock.js';
+import { removeWarnText, showWarnBlock, setWarnConfirmFunc, useExternalFunction } from '../features/handleBoolean/toggleWarnBlock';
 
 /*
     dispatch(updateWarnText(text));
@@ -11,9 +12,9 @@ import { removeWarnText, showWarnBlock, setWarnConfirmFunc, useExternalFunction 
     setWarnConfirmFunc(removeTourBlock);
 */ 
 
-export default function Warning() {
-  const warnText = useSelector((state) => state.toggleWarnBlock.warnText);
-  const ifHideScroll = useSelector((state) => state.toggleWarnBlock.ifHideScroll);
+const Warning: React.FC = () => {
+  const warnText = useSelector((state:RootState) => state.toggleWarnBlock.warnText);
+  const ifHideScroll = useSelector((state:RootState) => state.toggleWarnBlock.ifHideScroll);
 
   const dispatch = useDispatch();
 
@@ -28,10 +29,11 @@ export default function Warning() {
   }
 
   useEffect(() => {
-    document.querySelector('html').style.overflowY = 'hidden';
+    const htmlElement = document.querySelector('html') as HTMLHtmlElement;
+    htmlElement.style.overflowY = 'hidden';
     if(!ifHideScroll){
       return () => {
-        document.querySelector('html').style.overflowY = 'auto';
+        htmlElement.style.overflowY = 'auto';
       };
     }
   }, []);
@@ -52,3 +54,4 @@ export default function Warning() {
     </div>
   )
 }
+export default Warning;

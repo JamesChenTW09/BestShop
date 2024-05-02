@@ -4,7 +4,6 @@ import { TourObjectItem } from '../../Types/Types'
 import "../../Style/TourBlock/TourBlock.scss"
 import { RootState } from "../../app/store"
 
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as dislike, faStar as unClickStar } from '@fortawesome/free-regular-svg-icons'
 import { faEye, faArrowRight, faArrowLeft, faTrashCan, faStar as clickStar } from '@fortawesome/free-solid-svg-icons'
@@ -17,13 +16,9 @@ import { setIfFetchMainPage } from '../../features/handleBoolean/toggleFetchData
 
 const TourBlockDetail = React.lazy(() => import('./TourBlockDetail'));
 
-interface TourData{
-    data:TourObjectItem
-}
-
-const TourBlock: React.FC<TourData> = ({data}) => {
+const TourBlock: React.FC<{ data: TourObjectItem }> = ({ data }) => {
     const { like, view, id, _ragicId, file, name, createTime, stars, address, type} = data; 
-    const ifMultiImg = Array.isArray(file);
+    const hasMultipleImages = Array.isArray(file);
     const starCountArr = [1,2,3,4,5];
     const cachedUserData = localStorage.getItem(_ragicId+"_owner");
 
@@ -74,7 +69,7 @@ const TourBlock: React.FC<TourData> = ({data}) => {
   return (
     <section className='tourBlockItemContainer'> 
         <div className='tourBlockItem' onClick={handleShowTourDetail} onMouseOver={()=>setShowArrow(true)} onMouseOut={()=>setShowArrow(false)}>
-            {showArrow  && ifMultiImg && (
+            {showArrow  && hasMultipleImages && (
                 <>
                     <div className='nextImgButton flexCenter imgArrowButton' onClick={handleShowNextImg} style={imgTranslate !== (file.length-1) * -360? {display:"flex", pointerEvents:"auto"}:{display:"none", pointerEvents:"none"}}>
                         <FontAwesomeIcon icon={faArrowRight} className="navIcons" />
@@ -85,9 +80,9 @@ const TourBlock: React.FC<TourData> = ({data}) => {
                 </>
             )}
             <div className='tourItemImgContainer' style={{transform:`translate(${imgTranslate}px)`}}>
-                {ifMultiImg? 
-                    file.map((item, index)=>{
-                        return <img key={index} className='tourItemImg'  src={"https://ap9.ragic.com/sims/file.jsp?a=js1031222&f="+item} alt='Tour Photo'></img>
+                {hasMultipleImages? 
+                    file.map((image, index)=>{
+                        return <img key={index} className='tourItemImg'  src={"https://ap9.ragic.com/sims/file.jsp?a=js1031222&f="+image} alt='Tour Photo'></img>
                     })
                     :
                     <img className='tourItemImg' src={"https://ap9.ragic.com/sims/file.jsp?a=js1031222&f="+file} alt='Tour Photo'></img>
@@ -120,11 +115,11 @@ const TourBlock: React.FC<TourData> = ({data}) => {
                 </div>  
             </div>
         </div>
-        {ifShowBlockDetail?
+        {ifShowBlockDetail && (
         <Suspense>
            <TourBlockDetail likeHeartCount={likeHeartCount} setLikeHeartCount={setLikeHeartCount} data={data} />
         </Suspense>
-        :null}
+        )}
     </section>
   )
 }

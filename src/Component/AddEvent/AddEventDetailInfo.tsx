@@ -1,14 +1,12 @@
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 import AddEventDetailItems from "./AddEventDetailItems";
 import "../../Style/AddEvent/AddEventDetailInfo.scss"
 import { formData } from "../../Types/Types";
 import { RootState } from "../../app/store"
 
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPlus, faStar as clickStar} from '@fortawesome/free-solid-svg-icons'
 import {faStar as unclickStar} from '@fortawesome/free-regular-svg-icons'
-
 
 import {  useDispatch, useSelector } from 'react-redux';
 import {  addNewItemDetail  } from '../../features/handleInput/addItemInputObj';
@@ -22,7 +20,6 @@ const AddEventDetailInfo: React.FC<AddEventDetailInfo> = ({formData, setFormData
     const addItemDetailArr = useSelector((state:RootState) => state.addItemInputObj.addItemDetailArr);
     const screenWidth = useSelector((state:RootState) => state.screenSize.screenWidth);
     const smallScreen900 = screenWidth <= 900;
-
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>)=>{
         let { name, value } = e.target;

@@ -24,7 +24,6 @@ const AddEventBlock: React.FC = () => {
     const [ifImgLoading, setIfImgLoading] = useState(false);
     const [formData, setFormData] = useState({loc:"台北市", type:"餐廳", name:"", content:"", date:"", mainStarCount:""});
     const [steps, setSteps] = useState(ADDTOURSTEP.INSERTIMG);
-
     const addItemDetailArr = useSelector((state:RootState) => state.addItemInputObj.addItemDetailArr);
     const cropImgPositionList = useSelector((state:RootState) => state.addImgList.cropImgPositionList);
     const screenWidth = useSelector((state:RootState) => state.screenSize.screenWidth);
@@ -177,9 +176,9 @@ const cropImgUtil = (index: number, img: CanvasImageSource)=>{
     const {cropDefaultPosition, cropConfirmPosition} = cropImgPositionList[index];
     let cropDetail = cropDefaultPosition;
     if(cropConfirmPosition) cropDetail = cropConfirmPosition;
+    if(typeof cropDetail === "string") return;
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-
     canvas.width = cropDetail.width;
     canvas.height = cropDetail.height;  
     ctx.drawImage(

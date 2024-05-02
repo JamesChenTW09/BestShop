@@ -1,12 +1,11 @@
+import React, { useState } from "react";
 import "../../Style/AddEvent/AddEventDetailItems.scss"
 import { setItemDetailByIndex, removeItemDetailByIndex } from '../../features/handleInput/addItemInputObj';
 import {  useDispatch } from 'react-redux';
 
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faStar as clickStar} from '@fortawesome/free-solid-svg-icons'
-import {faStar as unclickStar, faTrashCan} from '@fortawesome/free-regular-svg-icons'
-import React, { useState } from "react";
+import { faStar as clickStar} from '@fortawesome/free-solid-svg-icons'
+import { faStar as unclickStar, faTrashCan} from '@fortawesome/free-regular-svg-icons'
 
 interface AddTimeDetail{
     data:{
@@ -20,12 +19,13 @@ interface AddTimeDetail{
 
 const AddTimeDetail: React.FC<AddTimeDetail> = ({data, index}) => {
     const dispatch = useDispatch();
+    const [starCount, setStarCount] = useState(0);
+    const starList = [1,2,3,4,5];
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
         const { name, value } = e.target;
         dispatch(setItemDetailByIndex({name, value, index}));
     }
-    const [starCount, setStarCount] = useState(0);
-    const starList = [1,2,3,4,5];
     const handleStarClick = (item: number)=>{
         if(item === starCount){
             setStarCount(0);
@@ -58,5 +58,4 @@ const AddTimeDetail: React.FC<AddTimeDetail> = ({data, index}) => {
     </div>
   )
 }
-
 export default AddTimeDetail;

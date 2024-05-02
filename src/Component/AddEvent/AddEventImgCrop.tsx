@@ -11,24 +11,17 @@ import { faPlus, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import {  useDispatch, useSelector } from 'react-redux';
 import {  setImgCropPositionByIndex, setImgCropDefaultPositionByIndex } from '../../features/handleAddImgs/addImgList';
 
-
-interface ifImgLoading{
-    ifImgLoading:boolean
-}
-
-
-const AddImgCrop: React.FC<ifImgLoading> = ({ifImgLoading}) => {
+const AddImgCrop: React.FC<{ifImgLoading:boolean}> = ({ifImgLoading}) => {
     const imgList = useSelector((state:RootState) => state.addImgList.imgList);
     const selectedMainImgIndex = useSelector((state:RootState) => state.addImgList.selectedMainImgIndex);
     const cropImgPositionList = useSelector((state:RootState) => state.addImgList.cropImgPositionList);
-
-    const imgCropDefaultPosition:CropImgPositionItem | string= cropImgPositionList[selectedMainImgIndex]["cropDefaultPosition"];
-    const imgCropConfirmPosition:CropImgPositionItem | string= cropImgPositionList[selectedMainImgIndex]["cropConfirmPosition"];
     const dispatch = useDispatch();
+
+    const imgCropDefaultPosition: CropImgPositionItem | string= cropImgPositionList[selectedMainImgIndex]["cropDefaultPosition"];
+    const imgCropConfirmPosition: CropImgPositionItem | string= cropImgPositionList[selectedMainImgIndex]["cropConfirmPosition"];
     
     const [crop, setCrop] = useState({ x: 0, y: 0});
     const [zoom, setZoom] = useState(1);
-
     const [croppedAreaPixel, setCroppedAreaPixel] = useState<CropImgPositionItem>();
     let currentCropAreaPixel: CropImgPositionItem;
   
@@ -53,7 +46,7 @@ const AddImgCrop: React.FC<ifImgLoading> = ({ifImgLoading}) => {
   return (
     <div className='addEventCropImgContainer'>
         <div className="spinner"></div>
-        {imgList[selectedMainImgIndex]? 
+        {imgList[selectedMainImgIndex] && (
         <>
             <div id='selectedMainAddImageContainer'>
                 <Cropper
@@ -75,20 +68,18 @@ const AddImgCrop: React.FC<ifImgLoading> = ({ifImgLoading}) => {
                 {imgList.map((item, index)=>{
                     return  <AddImgBlock key={index} index={index} item={item}/>
                 })}
-                {ifImgLoading?  
+                {ifImgLoading && (
                 <div className='addMoreImgsTempItem flexCenter'>                            
                     <FontAwesomeIcon icon={faSpinner} className="navIcons" spin />
-                </div>:null}
+                </div>)}
                 <div className='addMoreImgsItemIcon'>
                     <label htmlFor="fileInput">
                             <FontAwesomeIcon  icon={faPlus} className="navIcons" />
                     </label>
                 </div>
             </div>
-        </>:null}
+        </>)}
     </div>
   )
 }
-
-
 export default AddImgCrop;

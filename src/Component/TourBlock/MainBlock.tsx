@@ -11,7 +11,6 @@ import { setIfFetchMainPage } from '../../features/handleBoolean/toggleFetchData
 const AddEventComponent = React.lazy(() => import('../AddEvent/AddEventBlock'));
 
 const MainBlock: React.FC = () => {
-  const tempTourList = Array.from({length:10});
   const [tourList, setTourList] = useState<TourObjectItem[]>([]);
   const [ifScrollToBottom, setIfScrollToBottom] = useState(false);
   const [offset, setOffset] = useState(0);  
@@ -90,22 +89,20 @@ const MainBlock: React.FC = () => {
   return (
     <main className="mainBlockContainer">
       <div className="mainBlock">
-        {tourList.length === 0 && ifReFetchMainPage? tempTourList.map((item, index)=>{
+        {tourList.length === 0 && ifReFetchMainPage? Array.from({length:10}).map((item, index)=>{
           return <TempTourBlock key={index}/>
-        }): tourList.map((item)=>{
-          if(item) return <TourBlock key={item["_ragicId"]} data={item}/>
-        })
+        }): tourList.map((item)=>(
+          item && <TourBlock key={item["_ragicId"]} data={item}/>
+        ))
         }
       </div>
-      {addEventBlock? 
+      {addEventBlock && (
       <Suspense>
           <AddEventComponent />
       </Suspense>
-      :""}
+      )}
     </main>
   )
 }
-
-
 
 export default MainBlock;

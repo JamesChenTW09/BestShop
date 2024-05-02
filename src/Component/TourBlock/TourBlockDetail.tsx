@@ -18,20 +18,19 @@ interface TourDetailObjectItem {
   setLikeHeartCount: React.Dispatch<React.SetStateAction<number>>
 }
 
-
 const TourBlockDetail: React.FC<TourDetailObjectItem> =  ({data, likeHeartCount, setLikeHeartCount}) => {
   let { file, id, name, content, address, type, visitTime } = data;
   const ifMultiImg = Array.isArray(file);
 
   const [likeHeart, setLikeHeart] = useState(false);
   const [orderItemDetail, setOrderItemDetail] = useState<TourSubObjectItem[]>([]);
-  const [mainImg, setMainImg] = useState<string | string[]>("");
+  const [mainImg, setMainImg] = useState("");
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     setItemDetailOrder();
-    setMainImg(ifMultiImg ? file[0] : file);
+    setMainImg(ifMultiImg ? file[0] : file as string);
     const cachedUserData = localStorage.getItem(id+"_like");
     if(cachedUserData) setLikeHeart(true);
   }, []);
@@ -70,6 +69,23 @@ const TourBlockDetail: React.FC<TourDetailObjectItem> =  ({data, likeHeartCount,
       console.log("error " +e);
     }
   }
+
+  const buildImageUrl = (image: string) => {
+    return "https://ap9.ragic.com/sims/file.jsp?a=js1031222&f=" + image;
+  }
+
+  const renderImageList = () => {
+    return (
+      <div className="tourBlockDetailMoreImgContainer">
+        {Array.isArray(file) ? 
+          file.map((item, index) => (
+            <img key={index} className="tourBlockDetailMoreImgItem" onClick={() => setMainImg(item)} src={buildImageUrl(item)} alt='Tour Photo' />
+          )) :
+          <img className="tourBlockDetailMoreImgItem" src={buildImageUrl(file)} alt='Tour Photo' />
+        }
+      </div>
+    );
+  }
   return (
     <>
         <div className='tourBlockDetailContainer'>
@@ -78,17 +94,9 @@ const TourBlockDetail: React.FC<TourDetailObjectItem> =  ({data, likeHeartCount,
                   <h3>{name}</h3>
             </div>
             <div className="tourBlockDetailMainImgContainer">
-              {mainImg?<img className='tourBlockDetailMainImgItem' src={"https://ap9.ragic.com/sims/file.jsp?a=js1031222&f="+mainImg} alt="Tour Photo"></img>:""}
+              {mainImg && <img className='tourBlockDetailMainImgItem' src={buildImageUrl( mainImg )} alt="Tour Photo"></img>}
             </div>
-            <div className="tourBlockDetailMoreImgContainer">
-             {Array.isArray(file)? 
-                file.map(item=>{
-                    return <img className='tourBlockDetailMoreImgItem' onClick={()=>{setMainImg(item)}}  src={"https://ap9.ragic.com/sims/file.jsp?a=js1031222&f="+item} alt='Tour Photo'></img>
-                })
-                :
-                <img className='tourBlockDetailMoreImgItem' src={"https://ap9.ragic.com/sims/file.jsp?a=js1031222&f="+file} alt='Tour Photo'></img>
-              }
-            </div>
+            {renderImageList()}
             <div className='tourBlockDetailContentContainer'>
               <div className='tourBlockDetailAddressAndType'>
                 <div className='tourBlockDetailSmallItem'>{address}</div>
@@ -119,6 +127,4 @@ const TourBlockDetail: React.FC<TourDetailObjectItem> =  ({data, likeHeartCount,
     </>
   )
 }
-
-
 export default TourBlockDetail;

@@ -5,22 +5,23 @@ import {faStar as unClickStar } from '@fortawesome/free-regular-svg-icons'
 import React from "react";
 import { TourSubObjectItem } from '../../Types/Types';
 
-interface TourDetailSubObjectItem{
-  data:TourSubObjectItem
-}
-const TourBlockDetailItem: React.FC<TourDetailSubObjectItem> = ({data}) => {
+const TourBlockDetailItem: React.FC<{data:TourSubObjectItem}> = ({data}) => {
   const {index, name, price, stars } = data;
-  const starCountArr = [1,2,3,4,5];
   const itemIndex = Number(index) +1;
+
+  const renderStars = () => {
+    const starCountArr = [1, 2, 3, 4, 5];
+    return starCountArr.map((star, index) => (
+      <FontAwesomeIcon key={index} icon={star <= stars ? clickStar : unClickStar} className="navIcons" />
+    ));
+  };
   return (
     <div className='tourBlockDetailItemContainer'>
         <div className='tourBlockDetailItemTitle'>
           <span className="tourBlockDetailItemText">{itemIndex}.</span>
           <span className="tourBlockDetailItemText">{name}</span>
           <div className='tourBlockDetailStarContainer'>
-              {starCountArr.map(star=>{
-                  return <FontAwesomeIcon icon={star <= stars? clickStar:unClickStar} className="navIcons" />
-              })}
+            {renderStars()}
           </div>
         </div>
         <div className="tourBlockDetailItemPrice">
@@ -29,6 +30,4 @@ const TourBlockDetailItem: React.FC<TourDetailSubObjectItem> = ({data}) => {
     </div>
   )
 }
-
-
 export default TourBlockDetailItem;

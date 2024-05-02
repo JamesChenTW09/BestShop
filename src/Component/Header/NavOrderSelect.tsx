@@ -8,7 +8,7 @@ import { setOrderObj } from '../../features/handleInput/orderObj';
 import { showDropDown, removeAllDropDown } from '../../features/handleBoolean/toggleDropDown';
 
 const NavTagSelect: React.FC = () => {
-    const orderText = useSelector((state:RootState) => state.orderObj.orderKey);
+    const orderText = useSelector((state:RootState) => state.orderObj.orderText);
     const ifShowOrderDropDown = useSelector((state:RootState) => state.toggleDropDown.orderDropDown);
     const screenWidth = useSelector((state:RootState) => state.screenSize.screenWidth);
     const smallScreen800 = screenWidth <= 800;
